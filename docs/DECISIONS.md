@@ -87,3 +87,6 @@ Format : date — décision — raison. Les décisions structurantes ont aussi u
 - **2026-11-08** — Flaques par masque de bruit dans le shader du pavé (rugosité presque nulle, normale à plat,
   albédo assombri) : reflets des lanternes sans texture ni passe de réflexion. Une lumière de remplissage froide,
   opposée à la lune et sans ombre, garde lisibles les façades à contre-jour.
+- **2026-11-08** — Incident : la PR #14 a été fusionnée alors que la CI était rouge (erreur de typage dans un test).
+  Corrigé par la PR suivante. Règle désormais appliquée mécaniquement : la fusion est enchaînée au code de sortie de
+  `gh pr checks --watch` (`&&`), jamais décidée en lisant une sortie tronquée.
