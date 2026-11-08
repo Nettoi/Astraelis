@@ -22,6 +22,8 @@ export default tseslint.config(
         requestAnimationFrame: "readonly",
         document: "readonly",
         URL: "readonly",
+        Buffer: "readonly",
+        fetch: "readonly",
       },
     },
   },

@@ -15,7 +15,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "capture": "node tools/capture/capture.mjs"
+    "capture": "node tools/capture/capture.mjs",
+    "assets": "node tools/assets/assets.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.0",
