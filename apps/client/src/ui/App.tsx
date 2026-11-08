@@ -2,6 +2,7 @@ import { normaliserCode } from "@astraelis/shared";
 import { useEffect, useRef, useState } from "react";
 import { detecterLangue, TEXTES } from "../i18n";
 import { demarrerJeu } from "../jeu/moteur";
+import { choixQualite, palierDetecte } from "../jeu/rendu/choix";
 import { sessionHote, sessionInvite, type SessionJeu } from "../jeu/session";
 import { Accueil } from "./Accueil";
 import { Joystick } from "./Joystick";
@@ -25,7 +26,7 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    if (session) return demarrerJeu(canvas.current!, session);
+    if (session) return demarrerJeu(canvas.current!, session, choixQualite() ?? palierDetecte());
   }, [session]);
 
   const lancer = async (mode: "solo" | "creer" | "rejoindre", nom: string, saisie = "") => {

@@ -5,7 +5,7 @@
 - **Phase 0** (sem. 1–2) : monorepo, CI, auth gratuite, Sarn en greybox avec shader de ciel et lune, 4 joueurs qui se
   déplacent ensemble en pair-à-pair, déployé publiquement. Coût : 0 $.
 - **Phase 1** (sem. 3–10) : tranche verticale — Prologue complet, solo ou coop, 3 Constellations, combat Tempo entier
-  (parade, Fêlure, Résonance, une Invocation), un boss, pipeline peint, UI art nouveau, sauvegarde cloud, PWA
+  (parade, Fêlure, Résonance, une Invocation), un boss, pipeline de rendu cinématique, UI art nouveau, sauvegarde cloud, PWA
   installable, 60 fps mobile. Publié sur itch.io et le site.
 - **Phase 2** : Acte I, Cartes des Constellations, classements, Ordres de Veilleurs.
 - **Phase 3** : Acte II, Arène des Hérauts (défis coop contre la montre), saisons gratuites d'événements de Marée.

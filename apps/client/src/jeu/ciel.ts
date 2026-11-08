@@ -66,7 +66,8 @@ void main() {
   float mers = bruit(uv * 3.0 + 7.0) * 0.6 + bruit(uv * 9.0) * 0.4;
   vec3 surface = uLuneCouleur * (0.75 + 0.25 * smoothstep(0.35, 0.7, mers)) * (1.0 - 0.35 * dot(uv, uv));
   float halo = exp(-max(ang - uLuneRayon, 0.0) * 9.0) * 0.35;
-  col = mix(col, surface, disque) + uLuneCouleur * halo * (1.0 - disque);
+  // Valeurs HDR : la lune dépasse le seuil du bloom, le ciel reste sombre.
+  col = mix(col, surface * 1.5, disque) + uLuneCouleur * halo * 0.7 * (1.0 - disque);
 
   gl_FragColor = vec4(col, 1.0);
 }`;

@@ -1,6 +1,6 @@
 # 1. Vision
 
-ASTRÆLIS est un JRPG coopératif en ligne (1 à 4 joueurs) en 3D stylisée peinte, jouable dans le navigateur (PC et
+ASTRÆLIS est un JRPG coopératif en ligne (1 à 4 joueurs) en 3D au réalisme stylisé cinématique, jouable dans le navigateur (PC et
 téléphone) et installable comme PWA. **Contrainte numéro un : 0 $ par mois** (voir [`../COUTS.md`](../COUTS.md)).
 
 ## En trois phrases

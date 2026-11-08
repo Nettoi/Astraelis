@@ -1,5 +1,7 @@
 import { useState } from "react";
 import type { TEXTES } from "../i18n";
+import { choixQualite, enregistrerQualite } from "../jeu/rendu/choix";
+import { lirePalier, PALIERS } from "../jeu/rendu/qualite";
 
 interface Props {
   t: (typeof TEXTES)[keyof typeof TEXTES];
@@ -20,6 +22,7 @@ const lireNom = () => {
 export function Accueil({ t, occupe, erreur, lancer }: Props) {
   const [nom, setNom] = useState(lireNom);
   const [code, setCode] = useState(() => new URLSearchParams(location.search).get("partie") ?? "");
+  const [qualite, setQualite] = useState<string>(() => choixQualite() ?? "auto");
   const nomFinal = nom.trim() || "Veilleur";
   const go = (mode: "solo" | "creer" | "rejoindre") => {
     try {
@@ -67,6 +70,23 @@ export function Accueil({ t, occupe, erreur, lancer }: Props) {
           {t.rejoindre}
         </button>
       </form>
+      <label>
+        {t.qualite}
+        <select
+          value={qualite}
+          onChange={(e) => {
+            setQualite(e.target.value);
+            enregistrerQualite(lirePalier(e.target.value));
+          }}
+        >
+          <option value="auto">{t.paliers.auto}</option>
+          {PALIERS.map((p) => (
+            <option key={p} value={p}>
+              {t.paliers[p]}
+            </option>
+          ))}
+        </select>
+      </label>
       <p className="statut" role="status" aria-live="polite">
         {occupe ? t.connexion : (erreur ?? "")}
       </p>

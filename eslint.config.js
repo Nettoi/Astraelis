@@ -11,4 +11,18 @@ export default tseslint.config(
       "@typescript-eslint/consistent-type-imports": "error",
     },
   },
+  {
+    // Scripts d'outillage Node qui pilotent aussi une page (Playwright).
+    files: ["tools/**/*.mjs"],
+    languageOptions: {
+      globals: {
+        console: "readonly",
+        process: "readonly",
+        performance: "readonly",
+        requestAnimationFrame: "readonly",
+        document: "readonly",
+        URL: "readonly",
+      },
+    },
+  },
 );
