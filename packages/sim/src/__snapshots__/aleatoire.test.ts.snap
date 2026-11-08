@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creerAleatoire > suite de référence figée 1`] = `
+[
+  50271532,
+  266108690,
+  4195786334,
+]
+`;
