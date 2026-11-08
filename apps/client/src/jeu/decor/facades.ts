@@ -3,7 +3,7 @@ import { creerAleatoire, type Aleatoire } from "@astraelis/sim";
 import * as THREE from "three";
 import { boite, depuisTriangles, type Lots } from "./geometrie";
 
-export type CleQuartier = "facade" | "pierre" | "tuiles" | "bois" | "vitreAllumee" | "vitreSombre";
+export type CleQuartier = "facade" | "pierre" | "tuiles" | "bois" | "vitreAllumee" | "vitreSombre" | "fer";
 
 const MM = 0.001;
 const PROFONDEUR = 4; // profondeur d'une maison depuis la façade (m)

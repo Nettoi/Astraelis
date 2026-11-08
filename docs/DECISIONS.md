@@ -90,3 +90,13 @@ Format : date — décision — raison. Les décisions structurantes ont aussi u
 - **2026-11-08** — Incident : la PR #14 a été fusionnée alors que la CI était rouge (erreur de typage dans un test).
   Corrigé par la PR suivante. Règle désormais appliquée mécaniquement : la fusion est enchaînée au code de sortie de
   `gh pr checks --watch` (`&&`), jamais décidée en lisant une sortie tronquée.
+- **2026-11-08** — Modèles de décor Poly Haven (CC0) passés par un pipeline **gltf-transform + meshoptimizer** :
+  soudure, simplification, compression `EXT_meshopt_compression`, un `.glb` par modèle. Les sources brutes vont dans
+  `tools/assets/.cache/` (non versionné) ; seules les sorties optimisées sont versionnées. Résultat : 121 k → 16 k
+  triangles pour les quatre modèles. Chaque modèle est instancié (un appel de dessin par matériau).
+- **2026-11-08** — Accessoires (tonneaux, caisses, plantes) posés à 0,45 m des façades par une fonction pure et
+  testée, sans toucher aux collisions : le joueur peut les frôler de quelques centimètres. Si ça gêne, on ajoutera
+  des obstacles dans `packages/content`, ce qui est une décision de jeu, pas de rendu.
+- **2026-11-08** — Fête des Lampes : fanions sur des cordes entre les lampadaires de la place, pointes animées
+  dans le shader de sommets ; pétales et feuilles au sol instanciés (1 500, 600 en Léger) ; eau de la fontaine et
+  de la mer animée par perturbation de normale ; rideau d'eau additif sous la vasque.

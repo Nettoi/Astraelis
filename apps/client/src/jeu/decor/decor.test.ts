@@ -10,6 +10,7 @@ const TUILES: Record<CleQuartier, number> = {
   bois: 1.5,
   vitreAllumee: 1,
   vitreSombre: 1,
+  fer: 1,
 };
 const basique = () => new THREE.MeshBasicMaterial();
 const materiaux: Record<CleQuartier, THREE.Material> = {
@@ -19,6 +20,7 @@ const materiaux: Record<CleQuartier, THREE.Material> = {
   bois: basique(),
   vitreAllumee: basique(),
   vitreSombre: basique(),
+  fer: basique(),
 };
 const rect = { minX: -18000, minZ: -40000, maxX: -4000, maxZ: -18000 };
 

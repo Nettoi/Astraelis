@@ -1,0 +1,26 @@
+[
+  {
+    "source": "tools/assets/.cache/modeles/Lantern_01/Lantern_01_1k.gltf",
+    "sortie": "apps/client/public/modeles/lanterne.glb",
+    "ratio": 0.08,
+    "erreur": 0.004
+  },
+  {
+    "source": "tools/assets/.cache/modeles/wine_barrel_01/wine_barrel_01_1k.gltf",
+    "sortie": "apps/client/public/modeles/tonneau.glb",
+    "ratio": 0.15,
+    "erreur": 0.004
+  },
+  {
+    "source": "tools/assets/.cache/modeles/wooden_crate_01/wooden_crate_01_1k.gltf",
+    "sortie": "apps/client/public/modeles/caisse.glb",
+    "ratio": 0.2,
+    "erreur": 0.004
+  },
+  {
+    "source": "tools/assets/.cache/modeles/potted_plant_02/potted_plant_02_1k.gltf",
+    "sortie": "apps/client/public/modeles/plante.glb",
+    "ratio": 0.08,
+    "erreur": 0.03
+  }
+]
