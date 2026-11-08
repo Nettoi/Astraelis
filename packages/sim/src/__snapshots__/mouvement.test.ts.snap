@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`fuzz : invariants et déterminisme > empreinte de référence stable (détecte toute dérive de la simulation) 1`] = `
+{
+  "empreinte": 577297849,
+  "etat": {
+    "x": -67,
+    "z": 513,
+  },
+}
+`;
