@@ -36,3 +36,7 @@ Format : date — décision — raison. Les décisions structurantes ont aussi u
   Alternative écartée : PeerJS Cloud (service tiers gratuit mais sans garantie ni contrôle).
 - **2026-11-07** — `@astraelis/shared` ne garde que ce qui est partagé entre navigateur et Workers (codes de salon,
   protocole de signalisation) ; les constantes de simulation réseau vivent dans `@astraelis/net`.
+- **2026-11-07** — Hébergement : **Workers Static Assets** plutôt que Cloudflare Pages. Le même Worker sert le jeu et
+  l'API (même origine, un seul déploiement) ; les fichiers statiques sont gratuits et illimités, seul `/api/*`
+  invoque le Worker. Cloudflare oriente les nouveaux projets vers Workers. Prévisualisation par PR via
+  `wrangler versions upload --preview-alias`. Le workflow est inerte sans secrets Cloudflare.
