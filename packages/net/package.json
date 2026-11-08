@@ -10,6 +10,7 @@
     "typecheck": "tsc -p tsconfig.json"
   },
   "dependencies": {
+    "@astraelis/shared": "workspace:*",
     "@astraelis/sim": "workspace:*"
   }
 }
