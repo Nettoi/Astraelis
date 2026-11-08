@@ -193,6 +193,9 @@ importers:
       '@astraelis/net':
         specifier: workspace:*
         version: link:../../packages/net
+      '@astraelis/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
       '@astraelis/sim':
         specifier: workspace:*
         version: link:../../packages/sim
@@ -252,6 +255,9 @@ importers:
 
   packages/net:
     dependencies:
+      '@astraelis/shared':
+        specifier: workspace:*
+        version: link:../shared
       '@astraelis/sim':
         specifier: workspace:*
         version: link:../sim
