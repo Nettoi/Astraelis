@@ -30,3 +30,9 @@ Format : date — décision — raison. Les décisions structurantes ont aussi u
 - **2026-11-07** — En solo, l'hôte tourne dans le navigateur avec exactement le même code que la coop
   (`@astraelis/net`) : un seul chemin à tester. Le ciel (dégradé, étoiles, anneau de débris, Astrælis) est un seul
   shader plein écran, piloté par `parametresAstraelis(avancée)`.
+- **2026-11-07** — Salons de signalisation : un Durable Object SQLite par code (nommé `idFromName(code)`), API
+  d'hibernation WebSocket (pas de durée comptée au repos), état reconstruit depuis les étiquettes des sockets. Les
+  codes (6 lettres, sans I ni O) sont générés sans biais de modulo. Un invité ne peut signaler qu'à l'hôte.
+  Alternative écartée : PeerJS Cloud (service tiers gratuit mais sans garantie ni contrôle).
+- **2026-11-07** — `@astraelis/shared` ne garde que ce qui est partagé entre navigateur et Workers (codes de salon,
+  protocole de signalisation) ; les constantes de simulation réseau vivent dans `@astraelis/net`.

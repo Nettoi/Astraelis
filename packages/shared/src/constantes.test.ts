@@ -1,9 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { TICK_HZ, TICK_MS } from "./constantes";
+import { JOUEURS_MAX } from "./constantes";
 
 describe("constantes", () => {
-  it("le tick dure 50 ms à 20 Hz", () => {
-    expect(TICK_HZ).toBe(20);
-    expect(TICK_MS).toBe(50);
+  it("une partie coop compte au plus quatre joueurs", () => {
+    expect(JOUEURS_MAX).toBe(4);
   });
 });
