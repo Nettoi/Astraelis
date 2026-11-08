@@ -8,3 +8,7 @@ Format : date — décision — raison. Les décisions structurantes ont aussi u
   source longue ; en cas d'écart, le dépôt fait foi pour le code.
 - **2026-11-07** — Les références à des jeux existants ne servent qu'à décrire l'intention ; aucun nom propre de ces
   jeux n'apparaît dans le contenu jouable.
+- **2026-11-07** — Outillage : pnpm 12 (épinglé par `packageManager`), TypeScript 6.0 (typescript-eslint ne supporte
+  pas encore TS 7), Vitest 5 en mode `projects` à la racine, ESLint 10 en configuration plate, Prettier 3.
+- **2026-11-07** — Les paquets internes exposent directement leurs sources `.ts` (`exports` → `src/index.ts`) : pas de
+  build intermédiaire, Vite et Vitest les consomment tels quels ; seuls les apps produisent un build.
