@@ -1,0 +1,359 @@
+{
+  "id": "sarn",
+  "nom": {
+    "fr": "Sarn — Place des Lampes",
+    "en": "Sarn — Lamplight Square"
+  },
+  "palette": {
+    "sol": "#b9925e",
+    "batiment": "#c98f4a",
+    "accent": "#ffcf7a",
+    "ciel": "#1b2448",
+    "brouillard": "#2a3560"
+  },
+  "limites": {
+    "minX": -60000,
+    "minZ": -60000,
+    "maxX": 60000,
+    "maxZ": 60000
+  },
+  "apparitions": [
+    {
+      "x": -6000,
+      "z": -6000
+    },
+    {
+      "x": 6000,
+      "z": -6000
+    },
+    {
+      "x": -6000,
+      "z": 6000
+    },
+    {
+      "x": 6000,
+      "z": 6000
+    }
+  ],
+  "elements": [
+    {
+      "type": "batiment",
+      "rect": {
+        "minX": -40000,
+        "minZ": -40000,
+        "maxX": -22000,
+        "maxZ": -18000
+      },
+      "hauteur": 14000,
+      "bloquant": true
+    },
+    {
+      "type": "batiment",
+      "rect": {
+        "minX": -18000,
+        "minZ": -40000,
+        "maxX": -4000,
+        "maxZ": -18000
+      },
+      "hauteur": 18000,
+      "bloquant": true
+    },
+    {
+      "type": "batiment",
+      "rect": {
+        "minX": 4000,
+        "minZ": -40000,
+        "maxX": 18000,
+        "maxZ": -18000
+      },
+      "hauteur": 16000,
+      "bloquant": true
+    },
+    {
+      "type": "batiment",
+      "rect": {
+        "minX": 22000,
+        "minZ": -40000,
+        "maxX": 40000,
+        "maxZ": -18000
+      },
+      "hauteur": 12000,
+      "bloquant": true
+    },
+    {
+      "type": "batiment",
+      "rect": {
+        "minX": -40000,
+        "minZ": -14000,
+        "maxX": -18000,
+        "maxZ": -4000
+      },
+      "hauteur": 10000,
+      "bloquant": true
+    },
+    {
+      "type": "batiment",
+      "rect": {
+        "minX": 18000,
+        "minZ": -14000,
+        "maxX": 40000,
+        "maxZ": -4000
+      },
+      "hauteur": 11000,
+      "bloquant": true
+    },
+    {
+      "type": "batiment",
+      "rect": {
+        "minX": -40000,
+        "minZ": 4000,
+        "maxX": -18000,
+        "maxZ": 14000
+      },
+      "hauteur": 9000,
+      "bloquant": true
+    },
+    {
+      "type": "batiment",
+      "rect": {
+        "minX": 18000,
+        "minZ": 4000,
+        "maxX": 40000,
+        "maxZ": 14000
+      },
+      "hauteur": 13000,
+      "bloquant": true
+    },
+    {
+      "type": "batiment",
+      "rect": {
+        "minX": -40000,
+        "minZ": 18000,
+        "maxX": -22000,
+        "maxZ": 30000
+      },
+      "hauteur": 8000,
+      "bloquant": true
+    },
+    {
+      "type": "batiment",
+      "rect": {
+        "minX": -18000,
+        "minZ": 18000,
+        "maxX": -4000,
+        "maxZ": 30000
+      },
+      "hauteur": 10000,
+      "bloquant": true
+    },
+    {
+      "type": "batiment",
+      "rect": {
+        "minX": 4000,
+        "minZ": 18000,
+        "maxX": 18000,
+        "maxZ": 30000
+      },
+      "hauteur": 9000,
+      "bloquant": true
+    },
+    {
+      "type": "batiment",
+      "rect": {
+        "minX": 22000,
+        "minZ": 18000,
+        "maxX": 40000,
+        "maxZ": 30000
+      },
+      "hauteur": 8000,
+      "bloquant": true
+    },
+    {
+      "type": "batiment",
+      "rect": {
+        "minX": 44000,
+        "minZ": -52000,
+        "maxX": 50000,
+        "maxZ": -46000
+      },
+      "hauteur": 42000,
+      "bloquant": true
+    },
+    {
+      "type": "mur",
+      "rect": {
+        "minX": -58000,
+        "minZ": -58000,
+        "maxX": 58000,
+        "maxZ": -55000
+      },
+      "hauteur": 6000,
+      "bloquant": true
+    },
+    {
+      "type": "eau",
+      "rect": {
+        "minX": -60000,
+        "minZ": 40000,
+        "maxX": 60000,
+        "maxZ": 60000
+      },
+      "hauteur": 0,
+      "bloquant": true
+    },
+    {
+      "type": "mur",
+      "rect": {
+        "minX": -2000,
+        "minZ": 40000,
+        "maxX": 2000,
+        "maxZ": 52000
+      },
+      "hauteur": 1200,
+      "bloquant": false
+    },
+    {
+      "type": "fontaine",
+      "rect": {
+        "minX": -2500,
+        "minZ": -2500,
+        "maxX": 2500,
+        "maxZ": 2500
+      },
+      "hauteur": 1500,
+      "bloquant": true
+    },
+    {
+      "type": "lampadaire",
+      "rect": {
+        "minX": -12200,
+        "minZ": -12200,
+        "maxX": -11800,
+        "maxZ": -11800
+      },
+      "hauteur": 4500,
+      "bloquant": false
+    },
+    {
+      "type": "lampadaire",
+      "rect": {
+        "minX": 11800,
+        "minZ": -12200,
+        "maxX": 12200,
+        "maxZ": -11800
+      },
+      "hauteur": 4500,
+      "bloquant": false
+    },
+    {
+      "type": "lampadaire",
+      "rect": {
+        "minX": -12200,
+        "minZ": 11800,
+        "maxX": -11800,
+        "maxZ": 12200
+      },
+      "hauteur": 4500,
+      "bloquant": false
+    },
+    {
+      "type": "lampadaire",
+      "rect": {
+        "minX": 11800,
+        "minZ": 11800,
+        "maxX": 12200,
+        "maxZ": 12200
+      },
+      "hauteur": 4500,
+      "bloquant": false
+    },
+    {
+      "type": "lampadaire",
+      "rect": {
+        "minX": -200,
+        "minZ": -15200,
+        "maxX": 200,
+        "maxZ": -14800
+      },
+      "hauteur": 4500,
+      "bloquant": false
+    },
+    {
+      "type": "lampadaire",
+      "rect": {
+        "minX": -200,
+        "minZ": 14800,
+        "maxX": 200,
+        "maxZ": 15200
+      },
+      "hauteur": 4500,
+      "bloquant": false
+    },
+    {
+      "type": "lampadaire",
+      "rect": {
+        "minX": -15200,
+        "minZ": -200,
+        "maxX": -14800,
+        "maxZ": 200
+      },
+      "hauteur": 4500,
+      "bloquant": false
+    },
+    {
+      "type": "lampadaire",
+      "rect": {
+        "minX": 14800,
+        "minZ": -200,
+        "maxX": 15200,
+        "maxZ": 200
+      },
+      "hauteur": 4500,
+      "bloquant": false
+    },
+    {
+      "type": "lampadaire",
+      "rect": {
+        "minX": -10200,
+        "minZ": 35800,
+        "maxX": -9800,
+        "maxZ": 36200
+      },
+      "hauteur": 4500,
+      "bloquant": false
+    },
+    {
+      "type": "lampadaire",
+      "rect": {
+        "minX": 9800,
+        "minZ": 35800,
+        "maxX": 10200,
+        "maxZ": 36200
+      },
+      "hauteur": 4500,
+      "bloquant": false
+    },
+    {
+      "type": "lampadaire",
+      "rect": {
+        "minX": -30200,
+        "minZ": 35800,
+        "maxX": -29800,
+        "maxZ": 36200
+      },
+      "hauteur": 4500,
+      "bloquant": false
+    },
+    {
+      "type": "lampadaire",
+      "rect": {
+        "minX": 29800,
+        "minZ": 35800,
+        "maxX": 30200,
+        "maxZ": 36200
+      },
+      "hauteur": 4500,
+      "bloquant": false
+    }
+  ]
+}
