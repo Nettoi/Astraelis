@@ -1,9 +1,11 @@
 // Rejoue le pipeline d'assets : télécharge chaque source listée dans sources.json si le
-// fichier manque ou diffère, et vérifie son empreinte SHA-256. Usage : pnpm assets
+// fichier manque ou diffère, vérifie son empreinte SHA-256, puis optimise les modèles
+// (modeles.json → apps/client/public/modeles/*.glb). Usage : pnpm assets
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { optimiserModeles } from "./optimiser.mjs";
 
 const racine = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const sources = JSON.parse(await readFile(resolve(racine, "tools/assets/sources.json"), "utf8"));
@@ -28,4 +30,5 @@ for (const s of sources) {
   await writeFile(chemin, octets);
   console.log(`téléchargé ${s.fichier} (${(octets.length / 1e6).toFixed(1)} Mo)`);
 }
-process.exit(echecs ? 1 : 0);
+if (echecs) process.exit(1);
+await optimiserModeles(racine);

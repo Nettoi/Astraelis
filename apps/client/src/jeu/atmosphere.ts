@@ -1,6 +1,7 @@
 import type { Zone } from "@astraelis/content";
 import { creerAleatoire } from "@astraelis/sim";
 import * as THREE from "three";
+import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import type { Ambiance } from "./rendu/ambiances";
 
 const MM = 0.001;
@@ -74,16 +75,16 @@ export function creerAtmosphere(zone: Zone, ambiance: Ambiance, nombreParticules
     side: THREE.DoubleSide,
     ...additif,
   });
-  for (const e of lanternes) {
+  // Tous les cônes en une seule géométrie : un appel de dessin.
+  const cones = lanternes.map((e) => {
     const hauteur = e.hauteur * MM + 0.3;
-    const cone = new THREE.Mesh(new THREE.ConeGeometry(2.6, hauteur, 24, 1, true), materiauCone);
-    cone.position.set(
+    return new THREE.ConeGeometry(2.6, hauteur, 24, 1, true).translate(
       ((e.rect.minX + e.rect.maxX) / 2) * MM,
       hauteur / 2,
       ((e.rect.minZ + e.rect.maxZ) / 2) * MM,
     );
-    groupe.add(cone);
-  }
+  });
+  if (cones.length) groupe.add(new THREE.Mesh(mergeGeometries(cones), materiauCone));
 
   const alea = creerAleatoire(0x5a41);
   const u = () => alea.suivant() / 2 ** 32;

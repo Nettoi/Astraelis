@@ -2,6 +2,7 @@ import type { Zone } from "@astraelis/content";
 import * as THREE from "three";
 import { boite, type Lots } from "./geometrie";
 import type { CleQuartier } from "./facades";
+import { injecterMonde } from "./shaders";
 
 const MM = 0.001;
 
@@ -11,32 +12,18 @@ const MM = 0.001;
  */
 export function ajouterFlaques(m: THREE.MeshStandardMaterial): void {
   m.onBeforeCompile = (s) => {
-    s.vertexShader = s.vertexShader
-      .replace("#include <common>", "#include <common>\nvarying vec3 vMonde;")
-      .replace(
-        "#include <project_vertex>",
-        "#include <project_vertex>\nvMonde = (modelMatrix * vec4(transformed, 1.0)).xyz;",
-      );
+    injecterMonde(s);
     s.fragmentShader = s.fragmentShader
-      .replace(
-        "#include <common>",
-        `#include <common>
-varying vec3 vMonde;
-float hFlaque(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
-float bFlaque(vec2 p) {
-  vec2 i = floor(p); vec2 f = fract(p); f = f * f * (3.0 - 2.0 * f);
-  return mix(mix(hFlaque(i), hFlaque(i + vec2(1, 0)), f.x), mix(hFlaque(i + vec2(0, 1)), hFlaque(i + vec2(1, 1)), f.x), f.y);
-}`,
-      )
       .replace(
         "#include <map_fragment>",
         `#include <map_fragment>
-float flaque = smoothstep(0.7, 0.74, bFlaque(vMonde.xz * 0.22) * 0.75 + bFlaque(vMonde.xz * 1.1) * 0.25);
-diffuseColor.rgb *= mix(1.0, 0.7, flaque);`,
+float flaque = smoothstep(0.66, 0.7, bRetouche(vMonde.xz * 0.22) * 0.75 + bRetouche(vMonde.xz * 1.1) * 0.25);
+// Variation de teinte à grande échelle : la répétition du pavé ne se voit plus.
+diffuseColor.rgb *= (0.75 + 0.5 * bRetouche(vMonde.xz * 0.06)) * mix(1.0, 0.6, flaque);`,
       )
       .replace(
         "#include <roughnessmap_fragment>",
-        "#include <roughnessmap_fragment>\nroughnessFactor = mix(roughnessFactor, 0.03, flaque);",
+        "#include <roughnessmap_fragment>\nroughnessFactor = mix(roughnessFactor * 0.85, 0.02, flaque);",
       )
       .replace(
         "#include <normal_fragment_maps>",

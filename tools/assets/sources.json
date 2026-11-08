@@ -106,5 +106,143 @@
     "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/weathered_brown_planks/weathered_brown_planks_arm_1k.jpg",
     "sha256": "a428a3a6f89f7bb5c945c9668f2ac6ec268736fda7a4a421fd3ec80d3946929c",
     "licence": "CC0 — Dimitrios Savva, Rico Cilliers, Poly Haven (weathered_brown_planks)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/Lantern_01/Lantern_01_1k.gltf",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/Lantern_01/Lantern_01_1k.gltf",
+    "sha256": "d3f8d7a7afec96d55d3b7f20c3e329c909d19d37047902a826bc157f77c27819",
+    "licence": "CC0 — Rajil Jose Macatangay, Poly Haven (Lantern_01)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/Lantern_01/textures/Lantern_01_brass_arm_1k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Lantern_01/Lantern_01_brass_arm_1k.jpg",
+    "sha256": "479e7105b170713373fdcca0c2f7dcce81913990f60cd4cfba1631f80f550191",
+    "licence": "CC0 — Rajil Jose Macatangay, Poly Haven (Lantern_01)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/Lantern_01/Lantern_01.bin",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/Lantern_01/Lantern_01.bin",
+    "sha256": "cb0c7eaaea361546201ba1c4324581ac7147c221851657b6e23d2f854beabe49",
+    "licence": "CC0 — Rajil Jose Macatangay, Poly Haven (Lantern_01)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/Lantern_01/textures/Lantern_01_brass_nor_gl_1k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Lantern_01/Lantern_01_brass_nor_gl_1k.jpg",
+    "sha256": "95f89554c659712c7591a2a3d61178c9c0c0ef2c26e133005f24e2366a10f9b8",
+    "licence": "CC0 — Rajil Jose Macatangay, Poly Haven (Lantern_01)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/Lantern_01/textures/Lantern_01_brass_diff_1k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Lantern_01/Lantern_01_brass_diff_1k.jpg",
+    "sha256": "d19d4c9417719a89ad824ce3a142f38f5e58c47b8640edca5eacca66918b608e",
+    "licence": "CC0 — Rajil Jose Macatangay, Poly Haven (Lantern_01)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/wooden_crate_01/wooden_crate_01_1k.gltf",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/wooden_crate_01/wooden_crate_01_1k.gltf",
+    "sha256": "fd9c6073acfc671e12b64666053f2805ae33aff5d3dbbcfe5c97c08c06644927",
+    "licence": "CC0 — James Ray Cock, Poly Haven (wooden_crate_01)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/wooden_crate_01/textures/wooden_crate_01_diff_1k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wooden_crate_01/wooden_crate_01_diff_1k.jpg",
+    "sha256": "16653f4abaf4c1d9bca94bde3bd8c54d0ea9a5298d1648abcf57de1f7ecc34cc",
+    "licence": "CC0 — James Ray Cock, Poly Haven (wooden_crate_01)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/wooden_crate_01/textures/wooden_crate_01_nor_gl_1k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wooden_crate_01/wooden_crate_01_nor_gl_1k.jpg",
+    "sha256": "f4ea44c7dc1686123d337039cb713d74e8a2dbc6d1bd2beeac276d06f5df3fab",
+    "licence": "CC0 — James Ray Cock, Poly Haven (wooden_crate_01)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/wooden_crate_01/wooden_crate_01.bin",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/wooden_crate_01/wooden_crate_01.bin",
+    "sha256": "85f381f8035f7a6f2f3b848640894c6d3333b261946dd8a338c0fe19e0bea21e",
+    "licence": "CC0 — James Ray Cock, Poly Haven (wooden_crate_01)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/wooden_crate_01/textures/wooden_crate_01_arm_1k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wooden_crate_01/wooden_crate_01_arm_1k.jpg",
+    "sha256": "cd0b031c3924905e16ffd78ead062c2cc274148c4104d09635310097738b4679",
+    "licence": "CC0 — James Ray Cock, Poly Haven (wooden_crate_01)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/potted_plant_02/potted_plant_02_1k.gltf",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/potted_plant_02/potted_plant_02_1k.gltf",
+    "sha256": "c533dcce0d1aa4379eb7db04601a04983f8df2422b28578de922655a416e64a9",
+    "licence": "CC0 — Rico Cilliers, Poly Haven (potted_plant_02)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/potted_plant_02/textures/potted_plant_02_leaves_diff_1k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/potted_plant_02/potted_plant_02_leaves_diff_1k.jpg",
+    "sha256": "3643dce6e6c0a9f40129bd837ec1a11802e8f43ea43cb29e58219d82e0ac632b",
+    "licence": "CC0 — Rico Cilliers, Poly Haven (potted_plant_02)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/potted_plant_02/potted_plant_02.bin",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/potted_plant_02/potted_plant_02.bin",
+    "sha256": "9c9812482c78a59789ed32fa842b4cbd9365e09c900c31ebb998e5efe627fe97",
+    "licence": "CC0 — Rico Cilliers, Poly Haven (potted_plant_02)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/potted_plant_02/textures/potted_plant_02_pot_rough_1k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/potted_plant_02/potted_plant_02_pot_rough_1k.jpg",
+    "sha256": "4e92ad8ee0f098050785d9a025e2c5a7d55bc7a7f7e1916cc7627fc7824a938f",
+    "licence": "CC0 — Rico Cilliers, Poly Haven (potted_plant_02)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/potted_plant_02/textures/potted_plant_02_leaves_rough_1k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/potted_plant_02/potted_plant_02_leaves_rough_1k.jpg",
+    "sha256": "ac8959f70c0e91e77f3cd6fd3f73578b8aed64ac6c33fc34ac027a4e88276960",
+    "licence": "CC0 — Rico Cilliers, Poly Haven (potted_plant_02)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/potted_plant_02/textures/potted_plant_02_pot_diff_1k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/potted_plant_02/potted_plant_02_pot_diff_1k.jpg",
+    "sha256": "684949bf24821d7e951d46915366b5a388d2e4ccaaa9d5284e718c83604705e9",
+    "licence": "CC0 — Rico Cilliers, Poly Haven (potted_plant_02)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/potted_plant_02/textures/potted_plant_02_leaves_nor_gl_1k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/potted_plant_02/potted_plant_02_leaves_nor_gl_1k.jpg",
+    "sha256": "e0fe090ff7a511729c9bbe59df7288b400430fdab178529443dec75e0f06007d",
+    "licence": "CC0 — Rico Cilliers, Poly Haven (potted_plant_02)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/potted_plant_02/textures/potted_plant_02_pot_nor_gl_1k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/potted_plant_02/potted_plant_02_pot_nor_gl_1k.jpg",
+    "sha256": "981a68721c8b7b9ac26b96d0210334599d5e8f529362f505082c071a0a58e86c",
+    "licence": "CC0 — Rico Cilliers, Poly Haven (potted_plant_02)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/wine_barrel_01/wine_barrel_01_1k.gltf",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/wine_barrel_01/wine_barrel_01_1k.gltf",
+    "sha256": "503d3339677217c3241a3cdbc1c803ed1eb82d1a48f51436d1545ec5745ae8d8",
+    "licence": "CC0 — James Ray Cock, Poly Haven (wine_barrel_01)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/wine_barrel_01/wine_barrel_01.bin",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/wine_barrel_01/wine_barrel_01.bin",
+    "sha256": "d827c31afed824b923ea9168462c93ab3ad3a88c4a68b155bd35efb1a02cbf00",
+    "licence": "CC0 — James Ray Cock, Poly Haven (wine_barrel_01)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/wine_barrel_01/textures/wine_barrel_01_diff_1k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wine_barrel_01/wine_barrel_01_diff_1k.jpg",
+    "sha256": "6bea25b4fadda0636b6b7e46e0cc15153eda21ef62c823d5ee2e06a5a7589214",
+    "licence": "CC0 — James Ray Cock, Poly Haven (wine_barrel_01)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/wine_barrel_01/textures/wine_barrel_01_arm_1k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wine_barrel_01/wine_barrel_01_arm_1k.jpg",
+    "sha256": "be658e1389dbe8669e847b8fc7df8affdce46d6582f01ac701555b6446a40b9d",
+    "licence": "CC0 — James Ray Cock, Poly Haven (wine_barrel_01)"
+  },
+  {
+    "fichier": "tools/assets/.cache/modeles/wine_barrel_01/textures/wine_barrel_01_nor_gl_1k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wine_barrel_01/wine_barrel_01_nor_gl_1k.jpg",
+    "sha256": "86cdb0729b44d1687c75d895e6d0ef650f7580d70f3bcb52bce6fedc5fd79b6f",
+    "licence": "CC0 — James Ray Cock, Poly Haven (wine_barrel_01)"
   }
 ]

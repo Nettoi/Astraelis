@@ -10,6 +10,8 @@ const TUILES: Record<CleQuartier, number> = {
   bois: 1.5,
   vitreAllumee: 1,
   vitreSombre: 1,
+  fer: 1,
+  toile: 1,
 };
 const basique = () => new THREE.MeshBasicMaterial();
 const materiaux: Record<CleQuartier, THREE.Material> = {
@@ -19,6 +21,8 @@ const materiaux: Record<CleQuartier, THREE.Material> = {
   bois: basique(),
   vitreAllumee: basique(),
   vitreSombre: basique(),
+  fer: basique(),
+  toile: basique(),
 };
 const rect = { minX: -18000, minZ: -40000, maxX: -4000, maxZ: -18000 };
 
@@ -42,14 +46,19 @@ describe("décor de Sarn", () => {
     expect(sommets(ilot(7))).not.toEqual(sommets(ilot(8)));
   });
 
-  it("l'habit reste collé au rectangle de collision (débords de toit et appuis ≤ 0,5 m)", () => {
-    const boite = new THREE.Box3();
-    for (const m of ilot(3)) boite.expandByObject(m);
-    expect(boite.min.x).toBeGreaterThanOrEqual(rect.minX / 1000 - 0.5);
-    expect(boite.max.x).toBeLessThanOrEqual(rect.maxX / 1000 + 0.5);
-    expect(boite.min.z).toBeGreaterThanOrEqual(rect.minZ / 1000 - 0.5);
-    expect(boite.max.z).toBeLessThanOrEqual(rect.maxZ / 1000 + 0.5);
-    expect(boite.max.y).toBeLessThanOrEqual(10.01);
+  it("à hauteur d'homme, l'habit reste collé à la collision ; auvents et balcons passent au-dessus", () => {
+    const [x0, x1, z0, z1] = [rect.minX / 1000, rect.maxX / 1000, rect.minZ / 1000, rect.maxZ / 1000];
+    const depasse = (x: number, z: number) => Math.max(x0 - x, x - x1, z0 - z, z - z1, 0);
+    let hautMax = 0;
+    for (const m of ilot(3)) {
+      const p = m.geometry.getAttribute("position");
+      for (let i = 0; i < p.count; i++) {
+        const [x, y, z] = [p.getX(i), p.getY(i), p.getZ(i)];
+        hautMax = Math.max(hautMax, y);
+        expect(depasse(x, z)).toBeLessThanOrEqual(y < 2.2 ? 0.5 : 1.2);
+      }
+    }
+    expect(hautMax).toBeLessThanOrEqual(10 + 1.2); // faîte ≤ hauteur de carte, cheminées comprises
   });
 
   it("un îlot peu profond (maisons de liaison étroites) se construit sans erreur", () => {

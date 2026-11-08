@@ -21,7 +21,7 @@ const SARN: Ambiance = {
   exposition: 0.9,
   brouillard: 0.011,
   environnement: 0.22,
-  lune: { couleur: "#9fb4ff", intensite: 1.1 },
+  lune: { couleur: "#a9bbff", intensite: 1.7 },
   lanternes: { couleur: "#ffa94d", intensite: 14, portee: 16 },
   // Contraste chaud / froid : ombres bleu nuit, hautes lumières dorées.
   etalonnage: {

@@ -24,6 +24,8 @@ export function demarrerJeu(canvas: HTMLCanvasElement, session: SessionJeu, pali
   const ambiance = ambianceDe(zone.id);
   // Inspection manuelle en développement seulement (retiré du build de production).
   if (import.meta.env.DEV) Object.assign(window, { __session: session });
+  const exposerRendu = (r: THREE.WebGLRenderer, s: THREE.Scene) =>
+    import.meta.env.DEV && Object.assign(window, { __rendu: r, __scene: s });
 
   // Avec post-traitement, l'anticrénelage vient du SMAA ; sans, du MSAA natif.
   const rendu = new THREE.WebGLRenderer({
@@ -73,15 +75,19 @@ export function demarrerJeu(canvas: HTMLCanvasElement, session: SessionJeu, pali
 
   const ciel = creerCiel(zone.palette.ciel, zone.palette.brouillard);
   const atmosphere = creerAtmosphere(zone, ambiance, reglages.postTraitement ? 800 : 300);
-  scene.add(
-    ciel.maillage,
-    construireZone(zone, ambiance, reglages.ombres, Math.min(8, rendu.capabilities.getMaxAnisotropy())),
-    atmosphere.groupe,
+  const decor = construireZone(
+    zone,
+    ambiance,
+    reglages.ombres,
+    Math.min(8, rendu.capabilities.getMaxAnisotropy()),
+    !reglages.postTraitement,
   );
+  scene.add(ciel.maillage, decor.groupe, atmosphere.groupe);
   const tailleTampon = new THREE.Vector2();
 
   const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 1000);
   const chaine = creerChaine(rendu, scene, camera, reglages, ambiance);
+  exposerRendu(rendu, scene);
   const avatars = new Map<string, THREE.Mesh>();
   let accumulateur = 0;
   let dernier = performance.now();
@@ -139,9 +145,9 @@ export function demarrerJeu(canvas: HTMLCanvasElement, session: SessionJeu, pali
     }
     const moi = avatars.get(session.idLocal);
     if (!moi) return;
-    cibleCamera.set(moi.position.x, 5.5, moi.position.z + 11);
+    cibleCamera.set(moi.position.x + 1.2, 3.4, moi.position.z + 7.5);
     camera.position.lerp(cibleCamera, reduireMouvements ? 1 : 0.12);
-    camera.lookAt(moi.position.x, 3.2, moi.position.z - 12);
+    camera.lookAt(moi.position.x, 3.6, moi.position.z - 14);
     // Centre d'ombre aligné sur la grille des texels : pas de scintillement en marchant.
     const cx = Math.round(moi.position.x / texelOmbre) * texelOmbre;
     const cz = Math.round(moi.position.z / texelOmbre) * texelOmbre;
@@ -149,6 +155,7 @@ export function demarrerJeu(canvas: HTMLCanvasElement, session: SessionJeu, pali
     lune.position.set(cx, 0, cz).addScaledVector(DIRECTION_LUNE, 60);
     ciel.maillage.position.copy(camera.position);
     ciel.avancer(maintenant / 1000);
+    decor.avancer(reduireMouvements ? 0 : maintenant / 1000);
     atmosphere.avancer(reduireMouvements ? 0 : maintenant / 1000, rendu.getDrawingBufferSize(tailleTampon).y);
     chaine.rendre();
   };
