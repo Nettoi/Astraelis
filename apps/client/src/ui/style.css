@@ -96,3 +96,99 @@ body {
     display: none;
   }
 }
+.accueil {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 24px 16px;
+  background: radial-gradient(circle at 50% 18%, #3a4a86 0, var(--nuit) 55%);
+}
+.accueil h1 {
+  margin: 0 0 12px;
+  font:
+    700 clamp(2.6rem, 9vw, 4.5rem) "Cormorant Garamond",
+    serif;
+  color: var(--laiton);
+  letter-spacing: 0.08em;
+}
+.accueil label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.95rem;
+  width: min(100%, 340px);
+}
+.accueil input {
+  min-height: 48px;
+  padding: 0 14px;
+  font:
+    600 1.1rem Inter,
+    sans-serif;
+  color: var(--texte);
+  background: rgb(0 0 0 / 0.3);
+  border: 1.5px solid rgb(255 207 122 / 0.6);
+  border-radius: 10px;
+}
+.accueil .rejoindre input {
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+}
+.actions,
+.rejoindre {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: flex-end;
+  width: min(100%, 340px);
+}
+.rejoindre label {
+  flex: 1 1 180px;
+}
+.accueil button,
+.partie button {
+  min-height: 48px;
+  min-width: 48px;
+  padding: 0 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font:
+    600 1rem Inter,
+    sans-serif;
+  color: var(--nuit);
+  background: var(--laiton);
+  border: none;
+}
+.accueil .actions button {
+  flex: 1 1 140px;
+}
+.accueil button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+.accueil button:focus-visible,
+.accueil input:focus-visible,
+.partie button:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+.statut {
+  min-height: 1.5em;
+  margin: 0;
+  text-align: center;
+}
+.partie {
+  position: absolute;
+  top: 64px;
+  right: 16px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font:
+    600 1rem Inter,
+    sans-serif;
+  text-shadow: 0 1px 4px rgb(0 0 0 / 0.7);
+}

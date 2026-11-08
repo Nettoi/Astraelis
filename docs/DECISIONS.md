@@ -36,6 +36,15 @@ Format : date — décision — raison. Les décisions structurantes ont aussi u
   Alternative écartée : PeerJS Cloud (service tiers gratuit mais sans garantie ni contrôle).
 - **2026-11-07** — `@astraelis/shared` ne garde que ce qui est partagé entre navigateur et Workers (codes de salon,
   protocole de signalisation) ; les constantes de simulation réseau vivent dans `@astraelis/net`.
+- **2026-11-07** — WebRTC : deux DataChannels par invité, « fiable » (événements) et « etat » (ordonné, sans
+  retransmission, pour le flux à 20 Hz). STUN public gratuit de Cloudflare ; le TURN viendra par le Worker. L'invité
+  ferme sa signalisation dès que le pair-à-pair est ouvert (moins de requêtes Workers).
+- **2026-11-07** — La simulation de l'hôte avance sur une minuterie avec rattrapage, pas sur `requestAnimationFrame`
+  (suspendu dans un onglet caché : la partie gelait si l'hôte changeait d'onglet). Limite connue : en arrière-plan,
+  le navigateur ralentit les minuteries à 1/s, donc les invités reçoivent l'état par à-coups. Correctif prévu : faire
+  tourner l'hôte dans un Web Worker.
+- **2026-11-07** — Le client appelle l'API en chemin relatif (`/api/...`) : Vite la relaie vers `wrangler dev` en
+  local, et en production le même Worker servira le jeu et l'API (même origine, pas de CORS).
 - **2026-11-07** — Hébergement : **Workers Static Assets** plutôt que Cloudflare Pages. Le même Worker sert le jeu et
   l'API (même origine, un seul déploiement) ; les fichiers statiques sont gratuits et illimités, seul `/api/*`
   invoque le Worker. Cloudflare oriente les nouveaux projets vers Workers. Prévisualisation par PR via

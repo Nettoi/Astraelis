@@ -12,6 +12,7 @@
   "dependencies": {
     "@astraelis/content": "workspace:*",
     "@astraelis/net": "workspace:*",
+    "@astraelis/shared": "workspace:*",
     "@astraelis/sim": "workspace:*",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",

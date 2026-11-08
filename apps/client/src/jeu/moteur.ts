@@ -1,19 +1,20 @@
-import { chargerZone, versCarteCollision } from "@astraelis/content";
-import { Hote, TICK_MS, type JoueurReseau } from "@astraelis/net";
+import { TICK_MS } from "@astraelis/net";
 import * as THREE from "three";
 import { creerCiel } from "./ciel";
 import { brancherClavier, commandes, lireAxes } from "./entrees";
+import type { SessionJeu } from "./session";
 import { construireZone, creerAvatar, versMetres } from "./zone3d";
 
 const COULEURS = ["#f2d39b", "#9bc4f2", "#c9f29b", "#f29bd0"];
 
 /**
- * Démarre le jeu dans un canvas. Phase 0 : partie solo, l'hôte tourne dans le
- * navigateur (même code que la coop, sans réseau). Renvoie une fonction d'arrêt.
+ * Démarre le rendu d'une session (solo, hôte ou invité) dans un canvas.
+ * Renvoie une fonction d'arrêt.
  */
-export function demarrerJeu(canvas: HTMLCanvasElement, nom: string): () => void {
-  const zone = chargerZone("sarn");
-  const hote = new Hote({ id: zone.id, apparitions: zone.apparitions, carte: versCarteCollision(zone) }, nom);
+export function demarrerJeu(canvas: HTMLCanvasElement, session: SessionJeu): () => void {
+  const { zone } = session;
+  // Inspection manuelle en développement seulement (retiré du build de production).
+  if (import.meta.env.DEV) Object.assign(window, { __session: session });
 
   const rendu = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: "high-performance" });
   rendu.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -30,9 +31,6 @@ export function demarrerJeu(canvas: HTMLCanvasElement, nom: string): () => void 
 
   const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 1000);
   const avatars = new Map<string, THREE.Mesh>();
-  let precedent: JoueurReseau[] = hote.instantane();
-  let courant = precedent;
-  let seq = 0;
   let accumulateur = 0;
   let dernier = performance.now();
   const debranclerClavier = brancherClavier(window);
@@ -49,31 +47,46 @@ export function demarrerJeu(canvas: HTMLCanvasElement, nom: string): () => void 
   observateur.observe(canvas);
   redimensionner();
 
-  let image = 0;
-  const boucle = (maintenant: number) => {
-    image = requestAnimationFrame(boucle);
-    accumulateur += Math.min(maintenant - dernier, 250);
+  // La simulation avance sur une minuterie, pas sur requestAnimationFrame : un onglet
+  // caché suspend le rendu mais l'hôte doit continuer à servir ses invités. Le
+  // rattrapage borné garde le temps de simulation juste quand le navigateur ralentit
+  // les minuteries (1 s en arrière-plan).
+  const avancer = () => {
+    const maintenant = performance.now();
+    accumulateur += Math.min(maintenant - dernier, 2_000);
     dernier = maintenant;
     while (accumulateur >= TICK_MS) {
       const { ax, az } = lireAxes(commandes);
-      hote.entreeLocale({ seq: ++seq, ax, az });
-      precedent = courant;
-      courant = hote.tick();
+      session.tick(ax, az);
       accumulateur -= TICK_MS;
     }
+  };
+  const minuterie = setInterval(avancer, TICK_MS / 2);
+
+  let image = 0;
+  const boucle = (maintenant: number) => {
+    image = requestAnimationFrame(boucle);
+    avancer();
     const alpha = accumulateur / TICK_MS;
-    for (const [i, j] of courant.entries()) {
+    const vus = session.joueurs(alpha);
+    for (const [i, j] of vus.entries()) {
       let a = avatars.get(j.id);
       if (!a) {
-        a = creerAvatar(COULEURS[i % COULEURS.length]!);
+        a = creerAvatar(j.id === session.idLocal ? COULEURS[0]! : COULEURS[1 + (i % 3)]!);
         avatars.set(j.id, a);
         scene.add(a);
       }
-      const p = precedent.find((x) => x.id === j.id) ?? j;
-      a.position.x = versMetres(p.x + (j.x - p.x) * alpha);
-      a.position.z = versMetres(p.z + (j.z - p.z) * alpha);
+      a.position.x = versMetres(j.x);
+      a.position.z = versMetres(j.z);
     }
-    const moi = avatars.get(courant[0]!.id)!;
+    for (const [id, a] of avatars) {
+      if (!vus.some((j) => j.id === id)) {
+        scene.remove(a);
+        avatars.delete(id);
+      }
+    }
+    const moi = avatars.get(session.idLocal);
+    if (!moi) return;
     cibleCamera.set(moi.position.x, 5.5, moi.position.z + 11);
     camera.position.lerp(cibleCamera, reduireMouvements ? 1 : 0.12);
     camera.lookAt(moi.position.x, 3.2, moi.position.z - 12);
@@ -85,8 +98,10 @@ export function demarrerJeu(canvas: HTMLCanvasElement, nom: string): () => void 
 
   return () => {
     cancelAnimationFrame(image);
+    clearInterval(minuterie);
     observateur.disconnect();
     debranclerClavier();
+    session.fermer();
     rendu.dispose();
   };
 }
