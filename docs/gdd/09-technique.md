@@ -28,7 +28,7 @@ apps/edge         Workers Cloudflare (auth, sauvegardes, signalisation, classeme
 packages/sim      simulation déterministe
 packages/net      WebRTC, hôte/invité, migration d'hôte
 packages/content  données de jeu + schémas Zod
-packages/render   shaders peints, ciel, post-traitement
+packages/render   matériaux, ciel, post-traitement cinématique
 packages/shared   types, protocole, utilitaires
 docs/gdd  docs/adr  docs/DECISIONS.md  docs/COUTS.md  docs/LICENSES.md
 ```

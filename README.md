@@ -1,6 +1,6 @@
 # ASTRÆLIS
 
-JRPG coopératif en ligne (1 à 4 joueurs) en 3D stylisée peinte, jouable dans le navigateur, sur PC et téléphone.
+JRPG coopératif en ligne (1 à 4 joueurs) en 3D au réalisme stylisé cinématique, jouable dans le navigateur, sur PC et téléphone.
 Vaelis est née sous sept lunes qui tombent une à une ; la dernière, Astrælis, descend, et le ciel entier est une
 horloge.
 
@@ -42,6 +42,7 @@ pnpm test         # tous les tests (Vitest)
 pnpm lint         # ESLint
 pnpm typecheck    # TypeScript strict
 pnpm build        # build de production du jeu
+pnpm capture      # captures 1080p + mobile et images par seconde (jeu lancé par pnpm dev)
 ```
 
 Pour tester la coop en local : un onglet _Créer une partie_, un second onglet ouvre le lien copié et _Rejoindre_.
@@ -62,7 +63,7 @@ Le jeu est alors en ligne sur `https://astraelis-edge.<sous-domaine>.workers.dev
 
 - **Phase 0** (en cours) : monorepo et CI ✅, simulation partagée ✅, Sarn en greybox sous Astrælis ✅, coop à 4 en
   pair-à-pair ✅, déploiement public, comptes (lien magique + Google).
-- **Phase 1** : Prologue complet, 3 Constellations, combat Tempo, un boss, rendu peint, PWA, 60 fps mobile.
+- **Phase 1** : Prologue complet, 3 Constellations, combat Tempo, un boss, rendu cinématique, PWA, 60 fps mobile.
 - **Phase 2** : Acte I, Cartes des Constellations, classements, Ordres de Veilleurs.
 - **Phase 3** : Acte II, Arène des Hérauts, saisons d'événements de Marée.
 - **Phase 4** : Acte III, fins, vote communautaire, lancement.

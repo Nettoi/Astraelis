@@ -15,6 +15,8 @@ export const TEXTES = {
     copierLien: "Copier le lien",
     lienCopie: "Lien copié",
     retour: "Retour",
+    qualite: "Qualité graphique",
+    paliers: { auto: "Automatique", cinema: "Cinéma", equilibre: "Équilibré", leger: "Léger" },
     erreurs: {
       "salon-complet": "La partie est complète (4 joueurs).",
       "pas-d-hote": "Aucune partie avec ce code.",
@@ -39,6 +41,8 @@ export const TEXTES = {
     copierLien: "Copy link",
     lienCopie: "Link copied",
     retour: "Back",
+    qualite: "Graphics quality",
+    paliers: { auto: "Automatic", cinema: "Cinematic", equilibre: "Balanced", leger: "Light" },
     erreurs: {
       "salon-complet": "This game is full (4 players).",
       "pas-d-hote": "No game with this code.",

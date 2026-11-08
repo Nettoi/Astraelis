@@ -2,8 +2,16 @@ import { TICK_MS } from "@astraelis/net";
 import * as THREE from "three";
 import { creerCiel } from "./ciel";
 import { brancherClavier, commandes, lireAxes } from "./entrees";
+import { ambianceDe } from "./rendu/ambiances";
+import { chargerEnvironnement } from "./rendu/environnement";
+import { creerChaine } from "./rendu/postprod";
+import { REGLAGES, type Palier } from "./rendu/qualite";
 import type { SessionJeu } from "./session";
 import { construireZone, creerAvatar, versMetres } from "./zone3d";
+
+/** Direction de la lune Astrælis (identique au ciel), vers laquelle pointe sa lumière. */
+const DIRECTION_LUNE = new THREE.Vector3(-0.32, 0.42, -1).normalize();
+const DEMI_COTE_OMBRE = 28;
 
 const COULEURS = ["#f2d39b", "#9bc4f2", "#c9f29b", "#f29bd0"];
 
@@ -11,25 +19,59 @@ const COULEURS = ["#f2d39b", "#9bc4f2", "#c9f29b", "#f29bd0"];
  * Démarre le rendu d'une session (solo, hôte ou invité) dans un canvas.
  * Renvoie une fonction d'arrêt.
  */
-export function demarrerJeu(canvas: HTMLCanvasElement, session: SessionJeu): () => void {
+export function demarrerJeu(canvas: HTMLCanvasElement, session: SessionJeu, palier: Palier): () => void {
   const { zone } = session;
+  const reglages = REGLAGES[palier];
+  const ambiance = ambianceDe(zone.id);
   // Inspection manuelle en développement seulement (retiré du build de production).
   if (import.meta.env.DEV) Object.assign(window, { __session: session });
 
-  const rendu = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: "high-performance" });
-  rendu.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  // Avec post-traitement, l'anticrénelage vient du SMAA ; sans, du MSAA natif.
+  const rendu = new THREE.WebGLRenderer({
+    canvas,
+    antialias: !reglages.postTraitement,
+    powerPreference: "high-performance",
+  });
+  rendu.setPixelRatio(Math.min(window.devicePixelRatio, reglages.ratioPixelsMax));
   rendu.outputColorSpace = THREE.SRGBColorSpace;
+  rendu.toneMapping = THREE.ACESFilmicToneMapping;
+  rendu.toneMappingExposure = ambiance.exposition;
+  rendu.shadowMap.enabled = reglages.ombres;
+  rendu.shadowMap.type = THREE.PCFSoftShadowMap;
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.Fog(zone.palette.brouillard, 30, 140);
-  scene.add(new THREE.HemisphereLight("#6f83c9", "#3b2a1c", 0.8));
-  const lune = new THREE.DirectionalLight("#cfd8ff", 1.4);
-  lune.position.set(-35, 55, -100);
-  scene.add(lune);
+  scene.fog = new THREE.FogExp2(zone.palette.brouillard, ambiance.brouillard);
+  scene.environmentIntensity = ambiance.environnement;
+  scene.add(new THREE.HemisphereLight("#33449a", "#120c08", 0.35));
+  const libererEnvironnement = chargerEnvironnement(rendu, scene, "/hdri/satara_night_1k.hdr");
+
+  // Une seule lumière à ombres : la lune. Sa carte d'ombre suit le joueur (cascade
+  // « près » ; au loin, le brouillard masque l'absence d'ombres).
+  const lune = new THREE.DirectionalLight(ambiance.lune.couleur, ambiance.lune.intensite);
+  lune.castShadow = reglages.ombres;
+  if (reglages.ombres) {
+    lune.shadow.mapSize.set(reglages.tailleOmbre, reglages.tailleOmbre);
+    Object.assign(lune.shadow.camera, {
+      left: -DEMI_COTE_OMBRE,
+      right: DEMI_COTE_OMBRE,
+      top: DEMI_COTE_OMBRE,
+      bottom: -DEMI_COTE_OMBRE,
+      near: 1,
+      far: 120,
+    });
+    lune.shadow.camera.updateProjectionMatrix();
+    lune.shadow.bias = -0.0004;
+    lune.shadow.normalBias = 0.03;
+    lune.shadow.radius = 3;
+  }
+  scene.add(lune, lune.target);
+  const texelOmbre = (2 * DEMI_COTE_OMBRE) / Math.max(reglages.tailleOmbre, 1);
+
   const ciel = creerCiel(zone.palette.ciel, zone.palette.brouillard);
-  scene.add(ciel.maillage, construireZone(zone));
+  scene.add(ciel.maillage, construireZone(zone, ambiance, reglages.ombres));
 
   const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 1000);
+  const chaine = creerChaine(rendu, scene, camera, reglages, ambiance);
   const avatars = new Map<string, THREE.Mesh>();
   let accumulateur = 0;
   let dernier = performance.now();
@@ -39,7 +81,7 @@ export function demarrerJeu(canvas: HTMLCanvasElement, session: SessionJeu): () 
 
   const redimensionner = () => {
     const { clientWidth: l, clientHeight: h } = canvas;
-    rendu.setSize(l, h, false);
+    chaine.redimensionner(l, h);
     camera.aspect = l / Math.max(h, 1);
     camera.updateProjectionMatrix();
   };
@@ -90,9 +132,14 @@ export function demarrerJeu(canvas: HTMLCanvasElement, session: SessionJeu): () 
     cibleCamera.set(moi.position.x, 5.5, moi.position.z + 11);
     camera.position.lerp(cibleCamera, reduireMouvements ? 1 : 0.12);
     camera.lookAt(moi.position.x, 3.2, moi.position.z - 12);
+    // Centre d'ombre aligné sur la grille des texels : pas de scintillement en marchant.
+    const cx = Math.round(moi.position.x / texelOmbre) * texelOmbre;
+    const cz = Math.round(moi.position.z / texelOmbre) * texelOmbre;
+    lune.target.position.set(cx, 0, cz);
+    lune.position.set(cx, 0, cz).addScaledVector(DIRECTION_LUNE, 60);
     ciel.maillage.position.copy(camera.position);
     ciel.avancer(maintenant / 1000);
-    rendu.render(scene, camera);
+    chaine.rendre();
   };
   image = requestAnimationFrame(boucle);
 
@@ -102,6 +149,8 @@ export function demarrerJeu(canvas: HTMLCanvasElement, session: SessionJeu): () 
     observateur.disconnect();
     debranclerClavier();
     session.fermer();
+    libererEnvironnement();
+    chaine.liberer();
     rendu.dispose();
   };
 }

@@ -49,3 +49,20 @@ Format : date — décision — raison. Les décisions structurantes ont aussi u
   l'API (même origine, un seul déploiement) ; les fichiers statiques sont gratuits et illimités, seul `/api/*`
   invoque le Worker. Cloudflare oriente les nouveaux projets vers Workers. Prévisualisation par PR via
   `wrangler versions upload --preview-alias`. Le workflow est inerte sans secrets Cloudflare.
+- **2026-11-08** — **Direction artistique : abandon du rendu « peint »** (rampe toon, filtre Kuwahara, contours) au
+  profit d'un **réalisme stylisé cinématique** façon JRPG moderne : PBR, lumière plausible, post-traitement lourd,
+  personnages héroïques. On reprend les principes, jamais le contenu d'un jeu existant. Le GDD (§8) est mis à jour.
+- **2026-11-08** — Pipeline de rendu avec les passes fournies par Three.js (`EffectComposer`) plutôt que la
+  bibliothèque `postprocessing` : aucune dépendance de plus, et tout tient dans une seule chaîne. Ordre : rendu en
+  virgule flottante → GTAO (demi-résolution, Cinéma seulement) → bloom (seuil 0,85, rayon 0,6, force 0,9) →
+  ACES + sRGB → LUT → vignette → SMAA. Le palier Léger saute le composeur : ACES directement et MSAA natif.
+- **2026-11-08** — La LUT d'étalonnage 32³ est **calculée** (teinte des ombres, des hautes lumières, saturation,
+  contraste) au lieu d'être peinte dans GIMP : réglages lisibles et testés, zéro fichier binaire, une par région.
+  Les réglages visuels (exposition, brouillard, lumières, LUT) vivent dans `apps/client/src/jeu/rendu/ambiances.ts`,
+  au-dessus de `packages/content` dont les données ne changent pas.
+- **2026-11-08** — Ombres : une seule lumière à ombres (la lune), carte de 2048 (Cinéma) ou 1024 (Équilibré) qui suit
+  le joueur sur 56 m, calée sur la grille des texels pour ne pas scintiller. La « cascade loin » est le brouillard :
+  une seconde carte coûterait un rendu de plus pour des ombres que la brume efface déjà.
+- **2026-11-08** — Captures et mesures avec Playwright (`pnpm capture`), Chromium sans interface mais sur le vrai
+  GPU (Metal). Limite : l'émulation mobile ralentit le processeur (×4) mais pas le GPU ; la vraie mesure 30 i/s sur
+  téléphone viendra avec la PR d'optimisation mobile.

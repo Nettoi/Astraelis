@@ -14,11 +14,13 @@
     "typecheck": "pnpm -r --if-present run typecheck",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "capture": "node tools/capture/capture.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.0",
     "eslint": "^10.14.0",
+    "playwright": "^1.65.0",
     "prettier": "^3.9.10",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.72.1",

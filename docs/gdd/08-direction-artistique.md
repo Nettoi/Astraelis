@@ -2,9 +2,15 @@
 
 ## Rendu
 
-- 3D stylisée peinte : rampe toon douce + post-traitement Kuwahara (coups de pinceau) + contours fins. Le style vient
-  des shaders et de la lumière, pas du nombre de polygones : des modèles low-poly CC0 bien éclairés avec ce pipeline
-  ressemblent à des toiles.
+- **Réalisme stylisé cinématique** (remplace la direction « peinte » le 2026-11-08, voir
+  [DECISIONS](../DECISIONS.md)) : matériaux PBR, lumière physiquement plausible, personnages aux proportions
+  héroïques. Une lumière clé froide (Astrælis, bleu-argent), des contre-jours chauds (lanternes), des ombres
+  profondes mais lisibles : chaque scène joue le contraste chaud / froid.
+- Le post-traitement fait la moitié du travail : tonemapping ACES, bloom doux sur ce qui émet, occlusion ambiante,
+  brume, étalonnage par LUT, vignette, SMAA ; profondeur de champ en cinématique.
+- Trois paliers de qualité détectés au lancement et réglables dans les options : Cinéma, Équilibré, Léger.
+  Objectif 60 i/s sur PC, 30 i/s stables sur téléphone milieu de gamme.
+- On s'inspire des principes des JRPG modernes, jamais de leur contenu (noms, modèles, textures, musique).
 - Ciel custom : Astrælis toujours visible, taille et couleur pilotées par l'acte ; anneau de débris animé ; nuit
   éclairée par la lune.
 - Cinématiques 100 % en moteur ; caméra dynamique sur les parades parfaites et les Invocations.
