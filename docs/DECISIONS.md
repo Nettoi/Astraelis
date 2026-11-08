@@ -24,3 +24,9 @@ Format : date — décision — raison. Les décisions structurantes ont aussi u
   Aucun secret n'était versionné.
 - **2026-11-07** — Les limites des paliers gratuits de `COUTS.md` sont reprises de la spécification et marquées
   « prévu » ; chacune est revérifiée sur la page officielle au moment d'activer le service.
+- **2026-11-07** — Salons de signalisation : un Durable Object SQLite par code (nommé `idFromName(code)`), API
+  d'hibernation WebSocket (pas de durée comptée au repos), état reconstruit depuis les étiquettes des sockets. Les
+  codes (6 lettres, sans I ni O) sont générés sans biais de modulo. Un invité ne peut signaler qu'à l'hôte.
+  Alternative écartée : PeerJS Cloud (service tiers gratuit mais sans garantie ni contrôle).
+- **2026-11-07** — `@astraelis/shared` ne garde que ce qui est partagé entre navigateur et Workers (codes de salon,
+  protocole de signalisation) ; les constantes de simulation réseau vivent dans `@astraelis/net`.

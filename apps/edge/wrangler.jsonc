@@ -1,0 +1,11 @@
+{
+  // Palier gratuit Workers : voir docs/COUTS.md. Durable Objects SQLite seulement (seul type du plan Free).
+  "name": "astraelis-edge",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-01",
+  "durable_objects": {
+    "bindings": [{ "name": "SALONS", "class_name": "Salon" }],
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Salon"] }],
+  "observability": { "enabled": true },
+}
