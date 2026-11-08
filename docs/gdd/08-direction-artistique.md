@@ -1,11 +1,13 @@
-# 8. Direction artistique
+# 8. Direction artistique (belle ET gratuite)
 
 ## Rendu
 
-- 3D stylisée peinte : rampe toon douce + post-traitement Kuwahara + contours fins + normales peintes.
-- Ciel custom avec Astrælis toujours visible ; taille et couleur pilotées par l'acte et la saison ; anneau de débris
-  animé.
-- Cinématiques 100 % en moteur.
+- 3D stylisée peinte : rampe toon douce + post-traitement Kuwahara (coups de pinceau) + contours fins. Le style vient
+  des shaders et de la lumière, pas du nombre de polygones : des modèles low-poly CC0 bien éclairés avec ce pipeline
+  ressemblent à des toiles.
+- Ciel custom : Astrælis toujours visible, taille et couleur pilotées par l'acte ; anneau de débris animé ; nuit
+  éclairée par la lune.
+- Cinématiques 100 % en moteur ; caméra dynamique sur les parades parfaites et les Invocations.
 
 ## Palettes par région
 
@@ -13,11 +15,14 @@ Voir [02-univers.md](02-univers.md#régions).
 
 ## Interface
 
-- Style art nouveau céleste.
-- Polices : Cormorant Garamond (titres) + Inter (texte).
-- Cibles tactiles ≥ 48 px. Accessibilité dès le début (contrastes, sous-titres, remappage, daltonisme, réduction
-  des effets).
+- Art nouveau céleste (laiton, courbes, constellations).
+- Cormorant Garamond (titres) + Inter (texte), Google Fonts, licence OFL.
+- Zones tactiles ≥ 48 px.
+- Accessibilité dès le début : remappage, modes daltoniens, taille de texte, mode Histoire, réduction des effets.
 
-## Musique
+## Musique et voix
 
-Orchestre + chœurs, motif à sept notes, leitmotiv par compagnon, combat superposé sans coupure.
+- Pistes CC0 / CC-BY choisies par région (créditées en jeu).
+- Le motif à sept notes (la berceuse) est joué par une petite bibliothèque de synthèse Web Audio écrite pour le jeu :
+  un thème original sans compositeur. Thème de combat superposé sans coupure.
+- Pas de doublage : dialogues écrits, « voix » stylisées synthétiques optionnelles (babillage syllabique).
