@@ -64,11 +64,20 @@ export function demarrerJeu(canvas: HTMLCanvasElement, session: SessionJeu, pali
     lune.shadow.radius = 3;
   }
   scene.add(lune, lune.target);
+  // Lumière de remplissage froide, opposée à la lune et sans ombres : les façades à
+  // contre-jour restent lisibles (principe d'éclairage de cinéma).
+  const remplissage = new THREE.DirectionalLight("#6f86d6", 0.35);
+  remplissage.position.set(25, 30, 60);
+  scene.add(remplissage);
   const texelOmbre = (2 * DEMI_COTE_OMBRE) / Math.max(reglages.tailleOmbre, 1);
 
   const ciel = creerCiel(zone.palette.ciel, zone.palette.brouillard);
   const atmosphere = creerAtmosphere(zone, ambiance, reglages.postTraitement ? 800 : 300);
-  scene.add(ciel.maillage, construireZone(zone, ambiance, reglages.ombres), atmosphere.groupe);
+  scene.add(
+    ciel.maillage,
+    construireZone(zone, ambiance, reglages.ombres, Math.min(8, rendu.capabilities.getMaxAnisotropy())),
+    atmosphere.groupe,
+  );
   const tailleTampon = new THREE.Vector2();
 
   const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 1000);

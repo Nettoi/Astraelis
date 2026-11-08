@@ -16,5 +16,95 @@
     "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/ldem_3_8bit.jpg",
     "sha256": "6d93f887e7d8bedfe35ab89ba785e5e3ca12381bd092a5e6abe2c707dda8bb98",
     "licence": "Domaine public — NASA SVS, CGI Moon Kit (LRO)"
+  },
+  {
+    "fichier": "apps/client/public/textures/paves_couleur.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/cobblestone_floor_04/cobblestone_floor_04_diff_1k.jpg",
+    "sha256": "b0662eaec38a2056ef00abc66d1a0e8da421d704ed3ff8f9e268ad4c7b2aa58c",
+    "licence": "CC0 — Rob Tuytel, Poly Haven (cobblestone_floor_04)"
+  },
+  {
+    "fichier": "apps/client/public/textures/paves_normale.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/cobblestone_floor_04/cobblestone_floor_04_nor_gl_1k.jpg",
+    "sha256": "a5c71dffb3f25b8b33cfeeb1bfc2fc0f158b8ebc04f3987d68f64343868d1065",
+    "licence": "CC0 — Rob Tuytel, Poly Haven (cobblestone_floor_04)"
+  },
+  {
+    "fichier": "apps/client/public/textures/paves_arm.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/cobblestone_floor_04/cobblestone_floor_04_arm_1k.jpg",
+    "sha256": "ad52fe50a0f756f91c87b0cb4f52809c5742fc9ec0a070f788b17350aaf81eea",
+    "licence": "CC0 — Rob Tuytel, Poly Haven (cobblestone_floor_04)"
+  },
+  {
+    "fichier": "apps/client/public/textures/facade_couleur.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/plastered_stone_wall/plastered_stone_wall_diff_1k.jpg",
+    "sha256": "b86e9a408aac5b493c31a4ec221e5022b0b704d2f51596006f7d6840a6a3300a",
+    "licence": "CC0 — Rob Tuytel, Poly Haven (plastered_stone_wall)"
+  },
+  {
+    "fichier": "apps/client/public/textures/facade_normale.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/plastered_stone_wall/plastered_stone_wall_nor_gl_1k.jpg",
+    "sha256": "c64dc8d1ad382b8832e430e738f099343ed959b7ae7d9390919a497536d1191e",
+    "licence": "CC0 — Rob Tuytel, Poly Haven (plastered_stone_wall)"
+  },
+  {
+    "fichier": "apps/client/public/textures/facade_arm.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/plastered_stone_wall/plastered_stone_wall_arm_1k.jpg",
+    "sha256": "27add65291ceecd2f17a82b720054829a8d18b9fb16adebacf5d690982a1585e",
+    "licence": "CC0 — Rob Tuytel, Poly Haven (plastered_stone_wall)"
+  },
+  {
+    "fichier": "apps/client/public/textures/pierre_couleur.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rustic_stone_wall_02/rustic_stone_wall_02_diff_1k.jpg",
+    "sha256": "a091e04d73ddf7485d1b99a66d6cfe270e9ba36cdc26f98dbc17934427e43bc9",
+    "licence": "CC0 — Amal Kumar, Poly Haven (rustic_stone_wall_02)"
+  },
+  {
+    "fichier": "apps/client/public/textures/pierre_normale.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rustic_stone_wall_02/rustic_stone_wall_02_nor_gl_1k.jpg",
+    "sha256": "a7e5c96b8ba3ab3d066c673c4da9b1b7735f176ed6b6b2b9f74216fc151225f7",
+    "licence": "CC0 — Amal Kumar, Poly Haven (rustic_stone_wall_02)"
+  },
+  {
+    "fichier": "apps/client/public/textures/pierre_arm.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rustic_stone_wall_02/rustic_stone_wall_02_arm_1k.jpg",
+    "sha256": "119a2dd5a764d82396e1ea3736aff0c981295ab756847a0bc90d455c182cb411",
+    "licence": "CC0 — Amal Kumar, Poly Haven (rustic_stone_wall_02)"
+  },
+  {
+    "fichier": "apps/client/public/textures/tuiles_couleur.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/ceramic_roof_01/ceramic_roof_01_diff_1k.jpg",
+    "sha256": "d16264943b3a052a6b91f4ad7c9c1f37c09f2a9e9c503bdb3477f4705c03ff8c",
+    "licence": "CC0 — Rob Tuytel, Poly Haven (ceramic_roof_01)"
+  },
+  {
+    "fichier": "apps/client/public/textures/tuiles_normale.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/ceramic_roof_01/ceramic_roof_01_nor_gl_1k.jpg",
+    "sha256": "e845af7ee8587e1452e5c2ed2780d9aaf827e21a88a59d074db66bf270ef58dd",
+    "licence": "CC0 — Rob Tuytel, Poly Haven (ceramic_roof_01)"
+  },
+  {
+    "fichier": "apps/client/public/textures/tuiles_arm.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/ceramic_roof_01/ceramic_roof_01_arm_1k.jpg",
+    "sha256": "76a9fecf7e4f80799b1c6d3d2d4809598364263cd766523c8135658353783120",
+    "licence": "CC0 — Rob Tuytel, Poly Haven (ceramic_roof_01)"
+  },
+  {
+    "fichier": "apps/client/public/textures/bois_couleur.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/weathered_brown_planks/weathered_brown_planks_diff_1k.jpg",
+    "sha256": "94833feda44e025a9139f7b5723ea84e4f0258d3b54939a79e1013c133085e29",
+    "licence": "CC0 — Dimitrios Savva, Rico Cilliers, Poly Haven (weathered_brown_planks)"
+  },
+  {
+    "fichier": "apps/client/public/textures/bois_normale.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/weathered_brown_planks/weathered_brown_planks_nor_gl_1k.jpg",
+    "sha256": "8d38f02f121c0e58eaedc19cd668faea21381ae3ff4d5332cd90de75e6683393",
+    "licence": "CC0 — Dimitrios Savva, Rico Cilliers, Poly Haven (weathered_brown_planks)"
+  },
+  {
+    "fichier": "apps/client/public/textures/bois_arm.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/weathered_brown_planks/weathered_brown_planks_arm_1k.jpg",
+    "sha256": "a428a3a6f89f7bb5c945c9668f2ac6ec268736fda7a4a421fd3ec80d3946929c",
+    "licence": "CC0 — Dimitrios Savva, Rico Cilliers, Poly Haven (weathered_brown_planks)"
   }
 ]

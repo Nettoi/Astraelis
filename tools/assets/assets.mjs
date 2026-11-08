@@ -17,7 +17,7 @@ for (const s of sources) {
     console.log(`ok        ${s.fichier}`);
     continue;
   }
-  const reponse = await fetch(s.url);
+  const reponse = await fetch(s.url, { headers: { "User-Agent": "astraelis-assets/1.0" } });
   const octets = Buffer.from(await reponse.arrayBuffer());
   if (!reponse.ok || empreinte(octets) !== s.sha256) {
     console.error(`ÉCHEC     ${s.fichier} (${reponse.status}, empreinte inattendue)`);
