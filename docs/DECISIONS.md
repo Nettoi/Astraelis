@@ -76,3 +76,14 @@ Format : date — décision — raison. Les décisions structurantes ont aussi u
   Léger), un seul appel de dessin. Pas de vraie brume volumétrique par marche de rayons : trop chère sur téléphone.
 - **2026-11-08** — Assets téléchargés rejouables : `tools/assets/sources.json` (URL, empreinte, licence) et
   `pnpm assets`. Les fichiers sont aussi versionnés pour que le build ne dépende pas du réseau.
+- **2026-11-08** — Bâtiments de Sarn **générés par le code** à partir des rectangles de la carte, plutôt que
+  modélisés dans Blender (non installé ici, et des fichiers binaires seraient plus durs à relire et à rejouer).
+  Chaque côté d'îlot devient une rangée de maisons de 5 à 6 m : rez de pierre ou soubassement, enduit teinté
+  (couleurs de sommets), colombages, fenêtres à appuis et volets, environ 45 % éclairées, porte, toit de tuiles à
+  pignons. Aléatoire à graine fixe : même ville à chaque partie. Le faîte ne dépasse jamais la hauteur de la carte
+  (test), donc Astrælis reste visible au-dessus des toits nord.
+- **2026-11-08** — Une fusion de géométrie par matériau (6 appels de dessin pour toute la ville). Textures Poly
+  Haven 1K (couleur, normale, ARM) en UV « monde » : même échelle sur tous les volumes, aucun dépliage.
+- **2026-11-08** — Flaques par masque de bruit dans le shader du pavé (rugosité presque nulle, normale à plat,
+  albédo assombri) : reflets des lanternes sans texture ni passe de réflexion. Une lumière de remplissage froide,
+  opposée à la lune et sans ombre, garde lisibles les façades à contre-jour.
