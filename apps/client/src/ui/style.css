@@ -1,0 +1,98 @@
+:root {
+  --nuit: #1b2448;
+  --ocre: #c98f4a;
+  --laiton: #ffcf7a;
+  --texte: #f6ecd9;
+  color-scheme: dark;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#racine {
+  margin: 0;
+  height: 100%;
+  background: var(--nuit);
+  color: var(--texte);
+}
+body {
+  font-family: Inter, system-ui, sans-serif;
+  overscroll-behavior: none;
+}
+.jeu {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+}
+.vue {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.hud {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  pointer-events: none;
+  text-shadow: 0 1px 4px rgb(0 0 0 / 0.7);
+}
+.hud h1 {
+  margin: 0;
+  font:
+    700 clamp(1.6rem, 4vw, 2.4rem) "Cormorant Garamond",
+    serif;
+  color: var(--laiton);
+  letter-spacing: 0.06em;
+}
+.compte {
+  margin: 0;
+  font:
+    500 1.15rem "Cormorant Garamond",
+    serif;
+}
+.aide {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+.joystick {
+  position: absolute;
+  left: max(24px, env(safe-area-inset-left));
+  bottom: max(24px, env(safe-area-inset-bottom));
+  width: 144px;
+  height: 144px;
+  border-radius: 50%;
+  border: 2px solid rgb(255 207 122 / 0.5);
+  background: rgb(27 36 72 / 0.35);
+  touch-action: none;
+}
+.joystick-bouton {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  border-radius: 50%;
+  background: rgb(255 207 122 / 0.75);
+}
+@media (hover: hover) and (pointer: fine) {
+  .joystick {
+    display: none;
+  }
+}
+@media (pointer: coarse) {
+  .aide {
+    display: none;
+  }
+}

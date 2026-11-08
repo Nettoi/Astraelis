@@ -39,7 +39,7 @@ __name(admettre, "admettre");
 function aLArrivee(participants, nouveau) {
   const hote = participants.find((p) => p.role === "hote") ?? (nouveau.role === "hote" ? nouveau : void 0);
   const envois = [
-    { a: nouveau.id, message: { t: "accueil", id: nouveau.id, role: nouveau.role, hote: hote?.id ?? null } }
+    { a: nouveau.id, message: { t: "accueil", id: nouveau.id, role: nouveau.role, hote: hote?.id ?? null } },
   ];
   if (nouveau.role === "invite" && hote)
     envois.push({ a: hote.id, message: { t: "arrivee", id: nouveau.id } });
@@ -112,8 +112,8 @@ var Salon = class extends DurableObject {
     this.envoyer(
       auDepart(
         this.participants().filter((p) => p.id !== id),
-        { id, role }
-      )
+        { id, role },
+      ),
     );
   }
 };
@@ -132,7 +132,7 @@ var src_default = {
       return env.SALONS.get(env.SALONS.idFromName(code)).fetch(requete);
     }
     return new Response("Introuvable", { status: 404, headers: CORS });
-  }
+  },
 };
 
 // ../../node_modules/.pnpm/wrangler@4.158.0_@cloudflare+workers-types@5.20261107.1/node_modules/wrangler/templates/middleware/middleware-ensure-req-body-drained.ts
@@ -143,8 +143,7 @@ var drainBody = /* @__PURE__ */ __name(async (request, env, _ctx, middlewareCtx)
     try {
       if (request.body !== null && !request.bodyUsed) {
         const reader = request.body.getReader();
-        while (!(await reader.read()).done) {
-        }
+        while (!(await reader.read()).done) {}
       }
     } catch (e) {
       console.error("Failed to drain the unused request body.", e);
@@ -159,7 +158,7 @@ function reduceError(e) {
     name: e?.name,
     message: e?.message ?? String(e),
     stack: e?.stack,
-    cause: e?.cause === void 0 ? void 0 : reduceError(e.cause)
+    cause: e?.cause === void 0 ? void 0 : reduceError(e.cause),
   };
 }
 __name(reduceError, "reduceError");
@@ -171,7 +170,7 @@ var jsonError = /* @__PURE__ */ __name(async (request, env, _ctx, middlewareCtx)
     const body = JSON.stringify(error);
     const headers = {
       "Content-Type": "application/json",
-      "MF-Experimental-Error-Stack": "true"
+      "MF-Experimental-Error-Stack": "true",
     };
     const encoded = encodeURIComponent(body);
     if (encoded.length <= 8192) {
@@ -183,7 +182,10 @@ var jsonError = /* @__PURE__ */ __name(async (request, env, _ctx, middlewareCtx)
 var middleware_miniflare3_json_error_default = jsonError;
 
 // .wrangler/tmp/bundle-8QGooq/middleware-insertion-facade.js
-var __INTERNAL_WRANGLER_MIDDLEWARE__ = [middleware_ensure_req_body_drained_default, middleware_miniflare3_json_error_default];
+var __INTERNAL_WRANGLER_MIDDLEWARE__ = [
+  middleware_ensure_req_body_drained_default,
+  middleware_miniflare3_json_error_default,
+];
 var middleware_insertion_facade_default = src_default;
 
 // ../../node_modules/.pnpm/wrangler@4.158.0_@cloudflare+workers-types@5.20261107.1/node_modules/wrangler/templates/middleware/common.ts
@@ -198,16 +200,13 @@ function __facade_invokeChain__(request, env, ctx, dispatch, middlewareChain) {
     dispatch,
     next(newRequest, newEnv) {
       return __facade_invokeChain__(newRequest, newEnv, ctx, dispatch, tail);
-    }
+    },
   };
   return head(request, env, ctx, middlewareCtx);
 }
 __name(__facade_invokeChain__, "__facade_invokeChain__");
 function __facade_invoke__(request, env, ctx, dispatch, finalMiddleware) {
-  return __facade_invokeChain__(request, env, ctx, dispatch, [
-    ...__facade_middleware__,
-    finalMiddleware
-  ]);
+  return __facade_invokeChain__(request, env, ctx, dispatch, [...__facade_middleware__, finalMiddleware]);
 }
 __name(__facade_invoke__, "__facade_invoke__");
 
@@ -238,7 +237,7 @@ function wrapExportedHandler(worker) {
   for (const middleware of __INTERNAL_WRANGLER_MIDDLEWARE__) {
     __facade_register__(middleware);
   }
-  const fetchDispatcher = /* @__PURE__ */ __name(function(request, env, ctx) {
+  const fetchDispatcher = /* @__PURE__ */ __name(function (request, env, ctx) {
     if (worker.fetch === void 0) {
       throw new Error("Handler does not export a fetch() function.");
     }
@@ -247,15 +246,14 @@ function wrapExportedHandler(worker) {
   return {
     ...worker,
     fetch(request, env, ctx) {
-      const dispatcher = /* @__PURE__ */ __name(function(type, init) {
+      const dispatcher = /* @__PURE__ */ __name(function (type, init) {
         if (type === "scheduled" && worker.scheduled !== void 0) {
-          const controller = new __Facade_ScheduledController__(Date.now(), init.cron ?? "", () => {
-          });
+          const controller = new __Facade_ScheduledController__(Date.now(), init.cron ?? "", () => {});
           return worker.scheduled(controller, env, ctx);
         }
       }, "dispatcher");
       return __facade_invoke__(request, env, ctx, dispatcher, fetchDispatcher);
-    }
+    },
   };
 }
 __name(wrapExportedHandler, "wrapExportedHandler");
@@ -277,8 +275,7 @@ function wrapWorkerEntrypoint(klass) {
     }, "#fetchDispatcher");
     #dispatcher = /* @__PURE__ */ __name((type, init) => {
       if (type === "scheduled" && super.scheduled !== void 0) {
-        const controller = new __Facade_ScheduledController__(Date.now(), init.cron ?? "", () => {
-        });
+        const controller = new __Facade_ScheduledController__(Date.now(), init.cron ?? "", () => {});
         return super.scheduled(controller);
       }
     }, "#dispatcher");
@@ -295,9 +292,5 @@ if (typeof middleware_insertion_facade_default === "object") {
   WRAPPED_ENTRY = wrapWorkerEntrypoint(middleware_insertion_facade_default);
 }
 var middleware_loader_entry_default = WRAPPED_ENTRY;
-export {
-  Salon,
-  __INTERNAL_WRANGLER_MIDDLEWARE__,
-  middleware_loader_entry_default as default
-};
+export { Salon, __INTERNAL_WRANGLER_MIDDLEWARE__, middleware_loader_entry_default as default };
 //# sourceMappingURL=index.js.map
