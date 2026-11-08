@@ -24,3 +24,9 @@ Format : date — décision — raison. Les décisions structurantes ont aussi u
   Aucun secret n'était versionné.
 - **2026-11-07** — Les limites des paliers gratuits de `COUTS.md` sont reprises de la spécification et marquées
   « prévu » ; chacune est revérifiée sur la page officielle au moment d'activer le service.
+- **2026-11-07** — Client Phase 0 rendu avec `WebGLRenderer` + `ShaderMaterial` GLSL. La migration vers
+  `WebGPURenderer` (repli WebGL2 automatique) se fera avec le pipeline peint dans `packages/render`, en TSL, pour ne
+  pas écrire les shaders deux fois. Alternative : WebGPU dès maintenant (TSL obligatoire, plus long pour une greybox).
+- **2026-11-07** — En solo, l'hôte tourne dans le navigateur avec exactement le même code que la coop
+  (`@astraelis/net`) : un seul chemin à tester. Le ciel (dégradé, étoiles, anneau de débris, Astrælis) est un seul
+  shader plein écran, piloté par `parametresAstraelis(avancée)`.
