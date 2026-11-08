@@ -45,3 +45,7 @@ Format : date — décision — raison. Les décisions structurantes ont aussi u
   tourner l'hôte dans un Web Worker.
 - **2026-11-07** — Le client appelle l'API en chemin relatif (`/api/...`) : Vite la relaie vers `wrangler dev` en
   local, et en production le même Worker servira le jeu et l'API (même origine, pas de CORS).
+- **2026-11-07** — Hébergement : **Workers Static Assets** plutôt que Cloudflare Pages. Le même Worker sert le jeu et
+  l'API (même origine, un seul déploiement) ; les fichiers statiques sont gratuits et illimités, seul `/api/*`
+  invoque le Worker. Cloudflare oriente les nouveaux projets vers Workers. Prévisualisation par PR via
+  `wrangler versions upload --preview-alias`. Le workflow est inerte sans secrets Cloudflare.

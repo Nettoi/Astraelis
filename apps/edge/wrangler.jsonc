@@ -7,5 +7,12 @@
     "bindings": [{ "name": "SALONS", "class_name": "Salon" }],
   },
   "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Salon"] }],
+  // Le même Worker sert le jeu (fichiers statiques : gratuits et illimités) et l'API.
+  // Seul /api/* invoque le Worker et compte dans les 100 000 requêtes/jour du plan Free.
+  "assets": {
+    "directory": "../client/dist",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"],
+  },
   "observability": { "enabled": true },
 }
