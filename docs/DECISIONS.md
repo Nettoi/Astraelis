@@ -16,3 +16,11 @@ Format : date — décision — raison. Les décisions structurantes ont aussi u
   mm/tick, axes d'entrée quantifiés sur [-127, 127]. Aucune fonction flottante non exacte (trigonométrie, `pow`) :
   le déterminisme entre moteurs JS est garanti par construction. Le fuzz (fast-check) vérifie les invariants et une
   empreinte figée détecte toute dérive.
+- **2026-11-07** — **Pivot « coût zéro »** (nouvelle version de la spécification) : plus de Colyseus, Fly.io, MongoDB
+  ni Redis ; coop 1–4 en WebRTC hôte autoritaire, backend Cloudflare Workers + D1 + R2. Voir
+  [ADR 0001](adr/0001-cout-zero-pair-a-pair.md). Alternatives : serveur Colyseus (payant), simulation en Durable
+  Object (sortirait du palier gratuit).
+- **2026-11-07** — Dépôt passé en **public** (demande explicite de la spécification : Actions illimitées et gratuites).
+  Aucun secret n'était versionné.
+- **2026-11-07** — Les limites des paliers gratuits de `COUTS.md` sont reprises de la spécification et marquées
+  « prévu » ; chacune est revérifiée sur la page officielle au moment d'activer le service.

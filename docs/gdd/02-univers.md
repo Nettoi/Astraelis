@@ -9,19 +9,18 @@
   Séraphin Valdeyr.
 - **Les Veilleurs** — guilde des allumeurs de lampes et cartographes du ciel. Les joueurs sont des Veilleurs
   Insomniaques.
-- **Les Lunaires** — nés dans les zones touchées par la Marée, peau constellée de lumière, sensibles à l'Æther,
-  parqués dans les faubourgs.
+- **Les Lunaires** — nés dans les zones touchées par la Marée, peau constellée de lumière, sensibles à l'Æther.
 - **Les Francs-Cendres** — cités libres des terres de verre où la Sixième Lune est tombée.
-- **Le Chœur** — sept Hérauts masqués, un par lune, boss de raid ; chacun porte un instrument.
+- **Le Chœur** — sept Hérauts masqués, un par lune, boss d'acte ; chacun porte un instrument.
 
 ## Régions
 
-| Région               | Rôle                           | Palette                  |
-| -------------------- | ------------------------------ | ------------------------ |
-| Sarn                 | Ville de départ, Prologue      | ocre / bleu nuit         |
-| Les Cendrées         | Acte I                         | noir / or                |
-| La Forêt Inversée    | Acte I                         | émeraude / violet        |
-| Haut-Sérail          | Acte II, capitale              | blanc / laiton / vitraux |
-| La Mer de Verre      | Acte II                        | turquoise / argent       |
-| Thalassa l'Engloutie | Acte II                        | indigo / vert-de-gris    |
-| Le Berceau           | Acte III, intérieur d'Astrælis | blanc-or / rose          |
+| Région               | Description                                             | Rôle     | Palette                  |
+| -------------------- | ------------------------------------------------------- | -------- | ------------------------ |
+| Sarn                 | Port en terrasses sous un anneau de débris              | Prologue | ocre / bleu nuit         |
+| Les Cendrées         | Plaines de verre noir, épaves d'aéronefs                | Acte I   | noir de verre / or       |
+| La Forêt Inversée    | Forêt qui pousse vers le bas depuis des îles flottantes | Acte I   | émeraude / violet        |
+| Haut-Sérail          | Cité flottante de marbre, laiton et vitraux             | Acte II  | blanc / laiton / vitraux |
+| La Mer de Verre      | Océan figé                                              | Acte II  | turquoise / argent       |
+| Thalassa l'Engloutie | Cité intacte sous le verre                              | Acte II  | indigo / vert-de-gris    |
+| Le Berceau           | Intérieur d'Astrælis                                    | Acte III | blanc-or / rose pâle     |

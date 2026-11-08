@@ -1,7 +1,7 @@
 # 1. Vision
 
-ASTRÆLIS est un JRPG multijoueur en ligne (coop, PvP, monde persistant) en 3D stylisée peinte, jouable dans le
-navigateur d'abord, puis empaqueté en application iOS, Android et PC.
+ASTRÆLIS est un JRPG coopératif en ligne (1 à 4 joueurs) en 3D stylisée peinte, jouable dans le navigateur (PC et
+téléphone) et installable comme PWA. **Contrainte numéro un : 0 $ par mois** (voir [`../COUTS.md`](../COUTS.md)).
 
 ## En trois phrases
 
@@ -10,17 +10,17 @@ navigateur d'abord, puis empaqueté en application iOS, Android et PC.
 2. Chaque Chute libère **la Marée**, qui efface de la mémoire de tous les gens qu'elle emporte — sauf de la mémoire
    des joueurs, **les Insomniaques**, qui se souviennent.
 3. Le jeu réunit une mise en scène cinématographique avec parade à la frame, des Invocations et un casting fort de
-   JRPG, et la structure sociale d'un MMO (raids, guildes) avec un mode 5v5 compétitif.
+   JRPG, et la coop à quatre des meilleurs RPG multijoueurs.
 
 ## Piliers
 
-1. **Le ciel est une horloge** — Astrælis est visible partout et grossit à chaque acte et à chaque saison du serveur.
+1. **Le ciel est une horloge** — Astrælis est visible partout et grossit à chaque acte.
 2. **On ne lève jamais les yeux du combat** — temps réel ; chaque coup ennemi se pare ou s'esquive au bon moment.
-3. **Le monde oublie, les joueurs se souviennent** — la mémoire est la ressource narrative ET la mécanique de saison.
-4. **Jouable à un comme à vingt-quatre** — solo avec compagnons IA, coop à 4, raids de 8 à 24, PvP 5v5.
+3. **Le monde oublie, les joueurs se souviennent** — la mémoire est la ressource narrative.
+4. **Jouable à un comme à quatre** — solo avec compagnons IA, coop en pair-à-pair, drop-in / drop-out.
 
 ## Références d'intention (jamais de copie)
 
 Clair Obscur : Expedition 33 (mise en scène, parade), la série Final Fantasy (Invocations, casting),
-World of Warcraft / Final Fantasy XIV (structure sociale), League of Legends (format 5v5).
+Final Fantasy VII Remake (combat Tempo), Persona (Liens).
 Aucun asset, nom, personnage, musique ni niveau de ces jeux n'est repris.

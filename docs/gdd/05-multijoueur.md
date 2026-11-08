@@ -1,24 +1,35 @@
-# 5. Multijoueur
+# 5. Multijoueur coop (gratuit, pair-à-pair)
 
-- **Veilles** (shards) d'environ 2 000 joueurs ; zones partagées ; donjons et chapitres instanciés de 1 à 4.
-- **Coop** : groupes de 4 ; raids de 8 (Hérauts) et de 24 (Dernière Ascension). Raids aussi en version 4 + IA.
-- **Solo complet** avec compagnons IA.
+## Parties
 
-## L'Arène du Chœur (PvP 5v5 classé, 15–20 min)
+- 1 à 4 joueurs. L'hôte crée une partie et reçoit un **code à 6 lettres** ; les autres rejoignent par le code ou un
+  lien. Drop-in / drop-out à tout moment.
+- La progression d'histoire est celle de l'hôte ; le butin et l'expérience sont à chacun.
 
-- Un éclat de lune tombe toutes les 3 minutes.
-- 3 éclats capturés = Invocation d'équipe qui frappe la Lanterne adverse.
-- Victoire en éteignant la Lanterne adverse.
+## Réseau
 
-## Ordres de Veilleurs (guildes)
+- **Hôte autoritaire** : la simulation (`packages/sim`) tourne chez l'hôte ; les invités envoient leurs entrées et
+  reçoivent l'état à 20 Hz (interpolation, prédiction locale du déplacement, réconciliation).
+- **Migration d'hôte** si l'hôte part.
+- WebRTC DataChannel : non fiable ordonné pour l'état, fiable pour les événements.
+- Signalisation et liste de salons : Worker Cloudflare + Durable Object. TURN Cloudflare Realtime en secours.
 
-Contrôle des Lanternes du monde, hall sur aéronef, vote pondéré au Grand Choix.
+## Social (gratuit)
 
-## Saisons
+- Liste d'amis par code.
+- Classements hebdomadaires (temps de boss, Arène des Hérauts en défi contre la montre) stockés dans D1.
+- Ordres de Veilleurs (guildes) : simples groupes avec tableau d'honneur.
 
-90 jours. Événements de Marée qui effacent temporairement un PNJ ou une zone, que les joueurs restaurent.
+## Solo
 
-## Économie et modèle
+Toute la campagne se joue seul avec compagnons IA. Le solo fonctionne hors ligne (PWA) ; la sauvegarde se
+synchronise au retour en ligne.
 
-- Lunite, hôtel des ventes, fabrication d'Éclats.
-- Achat unique + cosmétiques. **Zéro pay-to-win, zéro gacha, zéro publicité.**
+## Hors périmètre tant que non finançable
+
+PvP classé et raids massifs (exigent un serveur autoritaire). L'architecture le permettra sans réécriture : la
+simulation est séparée du réseau et pourra tourner dans un Durable Object.
+
+## Modèle
+
+Gratuit à jouer pendant le développement. Zéro pay-to-win, zéro gacha, zéro publicité.
