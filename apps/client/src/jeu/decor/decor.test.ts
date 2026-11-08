@@ -11,9 +11,15 @@ const TUILES: Record<CleQuartier, number> = {
   vitreAllumee: 1,
   vitreSombre: 1,
 };
-const materiaux = Object.fromEntries(
-  Object.keys(TUILES).map((k) => [k, new THREE.MeshBasicMaterial()]),
-) as Record<CleQuartier, THREE.Material>;
+const basique = () => new THREE.MeshBasicMaterial();
+const materiaux: Record<CleQuartier, THREE.Material> = {
+  facade: basique(),
+  pierre: basique(),
+  tuiles: basique(),
+  bois: basique(),
+  vitreAllumee: basique(),
+  vitreSombre: basique(),
+};
 const rect = { minX: -18000, minZ: -40000, maxX: -4000, maxZ: -18000 };
 
 function ilot(graine: number) {
