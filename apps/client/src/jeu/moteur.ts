@@ -1,6 +1,7 @@
 import { TICK_MS } from "@astraelis/net";
 import * as THREE from "three";
-import { creerCiel } from "./ciel";
+import { creerAtmosphere } from "./atmosphere";
+import { creerCiel, DIRECTION_LUNE } from "./ciel";
 import { brancherClavier, commandes, lireAxes } from "./entrees";
 import { ambianceDe } from "./rendu/ambiances";
 import { chargerEnvironnement } from "./rendu/environnement";
@@ -9,8 +10,6 @@ import { REGLAGES, type Palier } from "./rendu/qualite";
 import type { SessionJeu } from "./session";
 import { construireZone, creerAvatar, versMetres } from "./zone3d";
 
-/** Direction de la lune Astrælis (identique au ciel), vers laquelle pointe sa lumière. */
-const DIRECTION_LUNE = new THREE.Vector3(-0.32, 0.42, -1).normalize();
 const DEMI_COTE_OMBRE = 28;
 
 const COULEURS = ["#f2d39b", "#9bc4f2", "#c9f29b", "#f29bd0"];
@@ -68,7 +67,9 @@ export function demarrerJeu(canvas: HTMLCanvasElement, session: SessionJeu, pali
   const texelOmbre = (2 * DEMI_COTE_OMBRE) / Math.max(reglages.tailleOmbre, 1);
 
   const ciel = creerCiel(zone.palette.ciel, zone.palette.brouillard);
-  scene.add(ciel.maillage, construireZone(zone, ambiance, reglages.ombres));
+  const atmosphere = creerAtmosphere(zone, ambiance, reglages.postTraitement ? 800 : 300);
+  scene.add(ciel.maillage, construireZone(zone, ambiance, reglages.ombres), atmosphere.groupe);
+  const tailleTampon = new THREE.Vector2();
 
   const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 1000);
   const chaine = creerChaine(rendu, scene, camera, reglages, ambiance);
@@ -139,6 +140,7 @@ export function demarrerJeu(canvas: HTMLCanvasElement, session: SessionJeu, pali
     lune.position.set(cx, 0, cz).addScaledVector(DIRECTION_LUNE, 60);
     ciel.maillage.position.copy(camera.position);
     ciel.avancer(maintenant / 1000);
+    atmosphere.avancer(reduireMouvements ? 0 : maintenant / 1000, rendu.getDrawingBufferSize(tailleTampon).y);
     chaine.rendre();
   };
   image = requestAnimationFrame(boucle);
@@ -151,6 +153,7 @@ export function demarrerJeu(canvas: HTMLCanvasElement, session: SessionJeu, pali
     session.fermer();
     libererEnvironnement();
     chaine.liberer();
+    ciel.liberer();
     rendu.dispose();
   };
 }

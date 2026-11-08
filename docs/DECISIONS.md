@@ -66,3 +66,13 @@ Format : date — décision — raison. Les décisions structurantes ont aussi u
 - **2026-11-08** — Captures et mesures avec Playwright (`pnpm capture`), Chromium sans interface mais sur le vrai
   GPU (Metal). Limite : l'émulation mobile ralentit le processeur (×4) mais pas le GPU ; la vraie mesure 30 i/s sur
   téléphone viendra avec la PR d'optimisation mobile.
+- **2026-11-08** — Ciel : Astrælis est une sphère calculée dans le shader du ciel (intersection rayon / sphère), pas
+  un maillage : éclairée par un soleil lointain (phase gibbeuse, modèle de Lommel-Seeliger des corps sans
+  atmosphère), texture et relief NASA (domaine public) recolorés bleu-argent, veines de lunite émissives par bruit
+  « crête », plus visibles sur la face nocturne. Rayon angulaire porté à 0,15 rad au Prologue : la lune occupe une
+  grande part du cadre. L'anneau de débris de Vaelis passe devant elle, ce qui donne la profondeur.
+- **2026-11-08** — Brume : cônes additifs sous les lanternes (fondus selon l'angle de vue) et particules
+  (lucioles autour des lanternes, poussière sur la place) animées dans le shader de sommets, 800 points (300 en
+  Léger), un seul appel de dessin. Pas de vraie brume volumétrique par marche de rayons : trop chère sur téléphone.
+- **2026-11-08** — Assets téléchargés rejouables : `tools/assets/sources.json` (URL, empreinte, licence) et
+  `pnpm assets`. Les fichiers sont aussi versionnés pour que le build ne dépende pas du réseau.
