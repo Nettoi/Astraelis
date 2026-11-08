@@ -62,7 +62,8 @@ export function creerChaine(
 
   if (reglages.ao) {
     const ao = new GTAOPass(scene, camera, 1, 1);
-    ao.updateGtaoMaterial({ radius: 0.6, distanceExponent: 1.5, thickness: 1, scale: 1 });
+    ao.updateGtaoMaterial({ radius: 0.6, distanceExponent: 1.5, thickness: 1, scale: 1, samples: 8 });
+    ao.updatePdMaterial({ samples: 8, radius: 6 });
     ao.blendIntensity = 0.85;
     const tailleComplete = ao.setSize.bind(ao);
     ao.setSize = (l: number, h: number) => tailleComplete(Math.ceil(l / 2), Math.ceil(h / 2));

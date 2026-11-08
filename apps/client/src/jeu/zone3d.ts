@@ -1,10 +1,11 @@
 import type { Zone } from "@astraelis/content";
 import * as THREE from "three";
-import { construireIlot, type CleQuartier } from "./decor/facades";
+import { construireIlot, type CleQuartier, type LumiereAuSol } from "./decor/facades";
 import { boite as boiteLocale, Lots, uvMonde } from "./decor/geometrie";
 import { instancierModele, type Pose } from "./decor/modeles";
 import { guirlandes, lampadaires, placerAccessoires, type Accessoire } from "./decor/placements";
 import { ajouterFlaques, construireReperes, construireSol } from "./decor/sol";
+import { salirMurs, varierEmission } from "./decor/shaders";
 import { materiauPbr } from "./decor/textures";
 import { ajouterOndes, creerChute, creerGuirlandes, creerPetales, type Temps } from "./decor/vie";
 import type { Ambiance } from "./rendu/ambiances";
@@ -23,6 +24,7 @@ const TUILES: Record<CleQuartier, number> = {
   vitreAllumee: 1,
   vitreSombre: 1,
   fer: 1,
+  toile: 1,
 };
 
 const MODELES: Record<Accessoire, { url: string; hauteur: number }> = {
@@ -60,9 +62,12 @@ export function construireZone(
   groupe.add(sol);
 
   const lots = new Lots<CleQuartier>(TUILES);
+  const lumieres: LumiereAuSol[] = [];
   for (const [i, e] of zone.elements.entries()) {
-    if (e.type === "batiment" && e.hauteur < 20_000) construireIlot(lots, e.rect, e.hauteur * MM, 0x5a40 + i);
+    if (e.type === "batiment" && e.hauteur < 20_000)
+      construireIlot(lots, e.rect, e.hauteur * MM, 0x5a40 + i, lumieres);
   }
+  groupe.add(creerLumieresAuSol(lumieres, ambiance.lanternes.couleur));
   groupe.add(...construireReperes(lots, zone));
 
   const eau = zone.elements.find((e) => e.type === "eau");
@@ -114,15 +119,11 @@ export function construireZone(
   }
 
   const materiaux: Record<CleQuartier, THREE.Material> = {
-    facade: materiauPbr("facade", anisotropie),
-    pierre: materiauPbr("pierre", anisotropie),
+    facade: murSali(materiauPbr("facade", anisotropie)),
+    pierre: murSali(materiauPbr("pierre", anisotropie)),
     tuiles: materiauPbr("tuiles", anisotropie),
     bois: materiauPbr("bois", anisotropie),
-    vitreAllumee: new THREE.MeshStandardMaterial({
-      color: "#000000",
-      emissive: "#ffb766",
-      emissiveIntensity: 1.1,
-    }),
+    vitreAllumee: vitreVariee(),
     vitreSombre: new THREE.MeshStandardMaterial({ color: "#0b1020", roughness: 0.08, metalness: 0.3 }),
     fer: new THREE.MeshStandardMaterial({
       color: "#2a2724",
@@ -130,6 +131,7 @@ export function construireZone(
       metalness: 0.85,
       vertexColors: true,
     }),
+    toile: new THREE.MeshStandardMaterial({ roughness: 0.9, vertexColors: true }),
   };
   groupe.add(...lots.fusionner(materiaux, ombres));
 
@@ -177,6 +179,55 @@ export function construireZone(
       temps.value = t;
     },
   };
+}
+
+function murSali(m: THREE.MeshStandardMaterial): THREE.MeshStandardMaterial {
+  salirMurs(m);
+  return m;
+}
+
+function vitreVariee(): THREE.MeshStandardMaterial {
+  const m = new THREE.MeshStandardMaterial({
+    color: "#000000",
+    emissive: "#ffb766",
+    emissiveIntensity: 1.3,
+    vertexColors: true,
+  });
+  varierEmission(m);
+  return m;
+}
+
+/** Flaques de lumière chaude devant les vitrines : disques additifs dégradés, un appel de dessin. */
+function creerLumieresAuSol(lumieres: LumiereAuSol[], couleur: string): THREE.InstancedMesh {
+  const m = new THREE.ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    uniforms: { uCouleur: { value: new THREE.Color(couleur) } },
+    vertexShader: /* glsl */ `
+varying vec2 vUv;
+void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * instanceMatrix * vec4(position, 1.0); }`,
+    fragmentShader: /* glsl */ `
+uniform vec3 uCouleur;
+varying vec2 vUv;
+void main() {
+  vec2 d = (vUv - vec2(0.5, 0.75)) * vec2(1.0, 1.4);
+  float a = pow(max(1.0 - length(d) * 2.0, 0.0), 2.0) * 0.45;
+  gl_FragColor = vec4(uCouleur * a, 1.0);
+}`,
+  });
+  const im = new THREE.InstancedMesh(
+    new THREE.PlaneGeometry(3.2, 3.2).rotateX(-Math.PI / 2),
+    m,
+    Math.max(lumieres.length, 1),
+  );
+  const matrice = new THREE.Matrix4();
+  for (const [i, l] of lumieres.entries()) {
+    matrice.makeRotationY(l.angle).setPosition(l.x, 0.02, l.z);
+    im.setMatrixAt(i, matrice);
+  }
+  im.count = lumieres.length;
+  return im;
 }
 
 export function creerAvatar(couleur: string): THREE.Mesh {

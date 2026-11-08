@@ -3,7 +3,8 @@ import { creerAleatoire, type Aleatoire } from "@astraelis/sim";
 import * as THREE from "three";
 import { boite, depuisTriangles, type Lots } from "./geometrie";
 
-export type CleQuartier = "facade" | "pierre" | "tuiles" | "bois" | "vitreAllumee" | "vitreSombre" | "fer";
+export type CleQuartier =
+  "facade" | "pierre" | "tuiles" | "bois" | "vitreAllumee" | "vitreSombre" | "fer" | "toile";
 
 const MM = 0.001;
 const PROFONDEUR = 4; // profondeur d'une maison depuis la façade (m)
@@ -16,6 +17,17 @@ const DEBORD = 0.35;
 const ENDUITS = ["#ead6b4", "#dcb88e", "#cf9a5c", "#e6c7aa", "#d3ab80", "#f0e2c8"].map(
   (c) => new THREE.Color(c),
 );
+
+/** Toiles d'auvents et jardinières : couleurs de fête, lisibles de nuit. */
+const TOILES = ["#9e2a2f", "#2f4f8a", "#c9902f", "#e6dcc4", "#3f6b3a"].map((c) => new THREE.Color(c));
+const FEUILLAGE = new THREE.Color("#2f5a2a");
+
+/** Flaque de lumière chaude projetée au sol devant une vitrine éclairée (m, radians). */
+export interface LumiereAuSol {
+  x: number;
+  z: number;
+  angle: number;
+}
 
 const reel = (a: Aleatoire) => a.suivant() / 2 ** 32;
 
@@ -54,6 +66,7 @@ function toit(
 
 function fenetre(
   lots: Lots<CleQuartier>,
+  a: Aleatoire,
   r: THREE.Matrix4,
   x: number,
   y: number,
@@ -62,7 +75,17 @@ function fenetre(
   h = 1.5,
 ) {
   lots.ajouter("bois", boite(r, x - l / 2 - 0.1, x + l / 2 + 0.1, y - 0.1, y + h + 0.1, 0, 0.08));
-  lots.ajouter(allumee ? "vitreAllumee" : "vitreSombre", boite(r, x - l / 2, x + l / 2, y, y + h, 0.08, 0.1));
+  // Chaque fenêtre a sa lampe : intensité et chaleur varient (couleur de sommet).
+  const k = 0.45 + reel(a) * 1.1;
+  const lampe = new THREE.Color(k, k * (0.85 + reel(a) * 0.15), k * (0.65 + reel(a) * 0.2));
+  lots.ajouter(
+    allumee ? "vitreAllumee" : "vitreSombre",
+    boite(r, x - l / 2, x + l / 2, y, y + h, 0.08, 0.1),
+    lampe,
+  );
+  // Croisillons.
+  lots.ajouter("bois", boite(r, x - 0.035, x + 0.035, y, y + h, 0.1, 0.13));
+  lots.ajouter("bois", boite(r, x - l / 2, x + l / 2, y + h * 0.55 - 0.035, y + h * 0.55 + 0.035, 0.1, 0.13));
   lots.ajouter("pierre", boite(r, x - l / 2 - 0.2, x + l / 2 + 0.2, y - 0.22, y - 0.1, 0, 0.18));
   if (!allumee) {
     // Volets ouverts de part et d'autre.
@@ -71,7 +94,14 @@ function fenetre(
   }
 }
 
-function maison(lots: Lots<CleQuartier>, a: Aleatoire, r: THREE.Matrix4, l: number, hauteurMax: number) {
+function maison(
+  lots: Lots<CleQuartier>,
+  a: Aleatoire,
+  r: THREE.Matrix4,
+  l: number,
+  hauteurMax: number,
+  lumieres: LumiereAuSol[],
+) {
   const montee = (PROFONDEUR / 2) * PENTE;
   const hMur = Math.max(REZ + ETAGE, hauteurMax - montee - reel(a) * 2.2);
   const enduit = ENDUITS[a.entier(0, ENDUITS.length - 1)]!;
@@ -84,6 +114,15 @@ function maison(lots: Lots<CleQuartier>, a: Aleatoire, r: THREE.Matrix4, l: numb
   lots.ajouter("tuiles", pans, new THREE.Color().setHSL(0.04 + reel(a) * 0.03, 0.35, 0.55 + reel(a) * 0.2));
   lots.ajouter("facade", pignons, enduit);
   if (l < 3) return; // simple mur de liaison entre deux rangées
+
+  // Cheminée de pierre près du faîte, une maison sur deux.
+  if (reel(a) < 0.5) {
+    const xc = (reel(a) - 0.5) * (l - 1.4);
+    lots.ajouter(
+      "pierre",
+      boite(r, xc - 0.3, xc + 0.3, hMur, hMur + montee + 1.1, -PROFONDEUR / 2 - 0.9, -PROFONDEUR / 2 - 0.3),
+    );
+  }
 
   // Colombages : poutres d'étage, poteaux d'angle sur une maison sur deux.
   const colombages = reel(a) < 0.5;
@@ -98,14 +137,51 @@ function maison(lots: Lots<CleQuartier>, a: Aleatoire, r: THREE.Matrix4, l: numb
   // Rez-de-chaussée : une porte, une vitrine éclairée pour la fête des Lampes.
   const portes = l > 4.5 ? [-l / 4, l / 4] : [0];
   const iPorte = a.entier(0, portes.length - 1);
+  const angle = Math.atan2(r.elements[8]!, r.elements[10]!);
   for (const [i, x] of portes.entries()) {
-    if (i === iPorte) lots.ajouter("bois", boite(r, x - 0.6, x + 0.6, 0, 2.3, 0, 0.1));
-    else fenetre(lots, r, x, 0.9, reel(a) < 0.7, 1.6, 1.6);
+    if (i === iPorte) {
+      lots.ajouter("bois", boite(r, x - 0.6, x + 0.6, 0, 2.3, 0, 0.1));
+      if (reel(a) < 0.4) {
+        // Enseigne pendue à une potence de fer.
+        lots.ajouter("fer", boite(r, x + 0.75, x + 0.8, 2.95, 3.0, 0, 0.85));
+        lots.ajouter("bois", boite(r, x + 0.75, x + 0.8, 2.3, 2.85, 0.3, 0.8));
+      }
+      continue;
+    }
+    const allumee = reel(a) < 0.7;
+    fenetre(lots, a, r, x, 0.9, allumee, 1.6, 1.6);
+    if (allumee) {
+      const p = new THREE.Vector3(x, 0, 1.4).applyMatrix4(r);
+      lumieres.push({ x: p.x, z: p.z, angle });
+    }
+    if (reel(a) < 0.6) {
+      // Auvent de toile au-dessus de la vitrine, avec son lambrequin.
+      const toile = TOILES[a.entier(0, TOILES.length - 1)]!;
+      lots.ajouter("toile", boite(r, x - 1.1, x + 1.1, 2.72, 2.78, 0, 1.15), toile);
+      lots.ajouter("toile", boite(r, x - 1.1, x + 1.1, 2.5, 2.78, 1.12, 1.15), toile);
+    }
   }
   // Étages : une ou deux fenêtres, près de la moitié éclairées de l'intérieur.
   const colonnes = l > 4.5 ? [-l / 4, l / 4] : [0];
   for (let y = REZ + 0.9; y + 1.6 < hMur - 0.3; y += ETAGE) {
-    for (const x of colonnes) fenetre(lots, r, x, y, reel(a) < 0.45);
+    for (const x of colonnes) fenetre(lots, a, r, x, y, reel(a) < 0.45);
+  }
+  // Balcon fleuri au premier étage, une maison sur trois.
+  if (reel(a) < 0.35 && hMur > REZ + ETAGE) {
+    const x = colonnes[a.entier(0, colonnes.length - 1)]!;
+    const y = REZ + 0.75;
+    lots.ajouter("pierre", boite(r, x - 1.1, x + 1.1, y - 0.12, y, 0, 0.8));
+    lots.ajouter("fer", boite(r, x - 1.1, x + 1.1, y + 0.9, y + 0.95, 0.74, 0.8));
+    for (let xb = x - 1.05; xb <= x + 1.06; xb += 0.3)
+      lots.ajouter("fer", boite(r, xb - 0.02, xb + 0.02, y, y + 0.9, 0.75, 0.79));
+    lots.ajouter("bois", boite(r, x - 1, x + 1, y, y + 0.22, 0.5, 0.72));
+    lots.ajouter("toile", boite(r, x - 0.95, x + 0.95, y + 0.22, y + 0.5, 0.52, 0.72), FEUILLAGE);
+    for (let xf = x - 0.85; xf < x + 0.9; xf += 0.22)
+      lots.ajouter(
+        "toile",
+        boite(r, xf - 0.06, xf + 0.06, y + 0.45, y + 0.57, 0.56, 0.68),
+        TOILES[a.entier(0, 2)]!,
+      );
   }
 }
 
@@ -113,7 +189,13 @@ function maison(lots: Lots<CleQuartier>, a: Aleatoire, r: THREE.Matrix4, l: numb
  * Habille un îlot de la carte : une rangée de maisons sur chaque côté, un cœur de pierre
  * au milieu. Le rectangle de collision ne change pas ; seul son habit est généré.
  */
-export function construireIlot(lots: Lots<CleQuartier>, rect: Rect, hauteur: number, graine: number): void {
+export function construireIlot(
+  lots: Lots<CleQuartier>,
+  rect: Rect,
+  hauteur: number,
+  graine: number,
+  lumieres: LumiereAuSol[] = [],
+): void {
   const a = creerAleatoire(graine);
   const [x0, x1, z0, z1] = [rect.minX * MM, rect.maxX * MM, rect.minZ * MM, rect.maxZ * MM];
   const cotes = [
@@ -128,7 +210,14 @@ export function construireIlot(lots: Lots<CleQuartier>, rect: Rect, hauteur: num
     // Axe x local de la façade = (oz, 0, -ox).
     for (let i = 0; i < n; i++) {
       const decalage = -c.longueur / 2 + l * (i + 0.5);
-      maison(lots, a, repere(c.cx + c.oz * decalage, c.cz - c.ox * decalage, c.ox, c.oz), l, hauteur);
+      maison(
+        lots,
+        a,
+        repere(c.cx + c.oz * decalage, c.cz - c.ox * decalage, c.ox, c.oz),
+        l,
+        hauteur,
+        lumieres,
+      );
     }
   }
   const cœur = new THREE.Matrix4();

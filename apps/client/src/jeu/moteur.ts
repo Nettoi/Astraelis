@@ -145,9 +145,9 @@ export function demarrerJeu(canvas: HTMLCanvasElement, session: SessionJeu, pali
     }
     const moi = avatars.get(session.idLocal);
     if (!moi) return;
-    cibleCamera.set(moi.position.x, 5.5, moi.position.z + 11);
+    cibleCamera.set(moi.position.x + 1.2, 3.4, moi.position.z + 7.5);
     camera.position.lerp(cibleCamera, reduireMouvements ? 1 : 0.12);
-    camera.lookAt(moi.position.x, 3.2, moi.position.z - 12);
+    camera.lookAt(moi.position.x, 3.6, moi.position.z - 14);
     // Centre d'ombre aligné sur la grille des texels : pas de scintillement en marchant.
     const cx = Math.round(moi.position.x / texelOmbre) * texelOmbre;
     const cz = Math.round(moi.position.z / texelOmbre) * texelOmbre;
